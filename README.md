@@ -40,7 +40,7 @@ This is the base URL for that particular service.
 
 The example shown below, this value is `https://SAPES5.SAPDEVCENTER.COM:443/sap/opu/odata/sap/SEPMRA_SHOP`
 
-```json
+```js
 Entry {
     etag: None,
     id: "https://SAPES5.SAPDEVCENTER.COM:443/sap/opu/odata/iwfnd/catalogservice;v=2/ServiceCollection('ZSEPMRA_SHOP_0001')",
