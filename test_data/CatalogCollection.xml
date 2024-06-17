@@ -1,0 +1,27 @@
+<feed xmlns="http://www.w3.org/2005/Atom" xmlns:m="http://schemas.microsoft.com/ado/2007/08/dataservices/metadata" xmlns:d="http://schemas.microsoft.com/ado/2007/08/dataservices" xml:base="https://SAPES5.SAPDEVCENTER.COM:443/sap/opu/odata/iwfnd/catalogservice;v=2/">
+    <id>https://SAPES5.SAPDEVCENTER.COM:443/sap/opu/odata/iwfnd/catalogservice;v=2/CatalogCollection</id>
+    <title type="text">CatalogCollection</title>
+    <updated>2024-06-17T12:45:42Z</updated>
+    <author>
+        <name/>
+    </author>
+    <link href="CatalogCollection" rel="self" title="CatalogCollection"/>
+    <entry>
+        <id>https://SAPES5.SAPDEVCENTER.COM:443/sap/opu/odata/iwfnd/catalogservice;v=2/CatalogCollection('ES5')</id>
+        <title type="text">CatalogCollection('ES5')</title>
+        <updated>2024-06-17T12:45:42Z</updated>
+        <category term="catalogservice.Catalog" scheme="http://schemas.microsoft.com/ado/2007/08/dataservices/scheme"/>
+        <link href="CatalogCollection('ES5')" rel="edit" title="Catalog"/>
+        <link href="CatalogCollection('ES5')/Services" rel="http://schemas.microsoft.com/ado/2007/08/dataservices/related/Services" type="application/atom+xml;type=feed" title="Services"/>
+        <content type="application/xml">
+            <m:properties xmlns:m="http://schemas.microsoft.com/ado/2007/08/dataservices/metadata" xmlns:d="http://schemas.microsoft.com/ado/2007/08/dataservices">
+                <d:ID>ES5</d:ID>
+                <d:Description>Service Catalog</d:Description>
+                <d:ImageUrl/>
+                <d:Title>ES5</d:Title>
+                <d:UpdatedDate>2024-06-17T12:45:42</d:UpdatedDate>
+                <d:Url/>
+            </m:properties>
+        </content>
+    </entry>
+</feed>

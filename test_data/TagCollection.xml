@@ -1,0 +1,129 @@
+<feed xmlns="http://www.w3.org/2005/Atom" xmlns:m="http://schemas.microsoft.com/ado/2007/08/dataservices/metadata" xmlns:d="http://schemas.microsoft.com/ado/2007/08/dataservices" xml:base="https://SAPES5.SAPDEVCENTER.COM:443/sap/opu/odata/iwfnd/catalogservice;v=2/">
+    <id>https://SAPES5.SAPDEVCENTER.COM:443/sap/opu/odata/iwfnd/catalogservice;v=2/TagCollection</id>
+    <title type="text">TagCollection</title>
+    <updated>2024-06-17T12:32:14Z</updated>
+    <author>
+        <name/>
+    </author>
+    <link href="TagCollection" rel="self" title="TagCollection"/>
+    <entry>
+        <id>https://SAPES5.SAPDEVCENTER.COM:443/sap/opu/odata/iwfnd/catalogservice;v=2/TagCollection('CDS.SEPMRA_C_POAPV_SUPPLIER.SEPMRA_C_POAPV_SUPPLIER')</id>
+        <title type="text">TagCollection('CDS.SEPMRA_C_POAPV_SUPPLIER.SEPMRA_C_POAPV_SUPPLIER')</title>
+        <updated>2024-06-17T12:32:14Z</updated>
+        <category term="catalogservice.Tag" scheme="http://schemas.microsoft.com/ado/2007/08/dataservices/scheme"/>
+        <link href="TagCollection('CDS.SEPMRA_C_POAPV_SUPPLIER.SEPMRA_C_POAPV_SUPPLIER')" rel="self" title="Tag"/>
+        <link href="TagCollection('CDS.SEPMRA_C_POAPV_SUPPLIER.SEPMRA_C_POAPV_SUPPLIER')/Services" rel="http://schemas.microsoft.com/ado/2007/08/dataservices/related/Services" type="application/atom+xml;type=feed" title="Services"/>
+        <content type="application/xml">
+            <m:properties xmlns:m="http://schemas.microsoft.com/ado/2007/08/dataservices/metadata" xmlns:d="http://schemas.microsoft.com/ado/2007/08/dataservices">
+                <d:ID>CDS.SEPMRA_C_POAPV_SUPPLIER.SEPMRA_C_POAPV_SUPPLIER</d:ID>
+                <d:Text>CDS.SEPMRA_C_POAPV_SUPPLIER.SEPMRA_C_POAPV_Supplier</d:Text>
+                <d:Occurrence>1</d:Occurrence>
+            </m:properties>
+        </content>
+    </entry>
+    <entry>
+        <id>https://SAPES5.SAPDEVCENTER.COM:443/sap/opu/odata/iwfnd/catalogservice;v=2/TagCollection('CDS.SEPMRA_C_PO_CURRENCY.SEPMRA_C_PO_CURRENCY')</id>
+        <title type="text">TagCollection('CDS.SEPMRA_C_PO_CURRENCY.SEPMRA_C_PO_CURRENCY')</title>
+        <updated>2024-06-17T12:32:14Z</updated>
+        <category term="catalogservice.Tag" scheme="http://schemas.microsoft.com/ado/2007/08/dataservices/scheme"/>
+        <link href="TagCollection('CDS.SEPMRA_C_PO_CURRENCY.SEPMRA_C_PO_CURRENCY')" rel="self" title="Tag"/>
+        <link href="TagCollection('CDS.SEPMRA_C_PO_CURRENCY.SEPMRA_C_PO_CURRENCY')/Services" rel="http://schemas.microsoft.com/ado/2007/08/dataservices/related/Services" type="application/atom+xml;type=feed" title="Services"/>
+        <content type="application/xml">
+            <m:properties xmlns:m="http://schemas.microsoft.com/ado/2007/08/dataservices/metadata" xmlns:d="http://schemas.microsoft.com/ado/2007/08/dataservices">
+                <d:ID>CDS.SEPMRA_C_PO_CURRENCY.SEPMRA_C_PO_CURRENCY</d:ID>
+                <d:Text>CDS.SEPMRA_C_PO_CURRENCY.SEPMRA_C_PO_Currency</d:Text>
+                <d:Occurrence>1</d:Occurrence>
+            </m:properties>
+        </content>
+    </entry>
+    <entry>
+        <id>https://SAPES5.SAPDEVCENTER.COM:443/sap/opu/odata/iwfnd/catalogservice;v=2/TagCollection('CDS.SEPMRA_C_PO_EMPLOYEE.SEPMRA_C_PO_EMPLOYEE')</id>
+        <title type="text">TagCollection('CDS.SEPMRA_C_PO_EMPLOYEE.SEPMRA_C_PO_EMPLOYEE')</title>
+        <updated>2024-06-17T12:32:14Z</updated>
+        <category term="catalogservice.Tag" scheme="http://schemas.microsoft.com/ado/2007/08/dataservices/scheme"/>
+        <link href="TagCollection('CDS.SEPMRA_C_PO_EMPLOYEE.SEPMRA_C_PO_EMPLOYEE')" rel="self" title="Tag"/>
+        <link href="TagCollection('CDS.SEPMRA_C_PO_EMPLOYEE.SEPMRA_C_PO_EMPLOYEE')/Services" rel="http://schemas.microsoft.com/ado/2007/08/dataservices/related/Services" type="application/atom+xml;type=feed" title="Services"/>
+        <content type="application/xml">
+            <m:properties xmlns:m="http://schemas.microsoft.com/ado/2007/08/dataservices/metadata" xmlns:d="http://schemas.microsoft.com/ado/2007/08/dataservices">
+                <d:ID>CDS.SEPMRA_C_PO_EMPLOYEE.SEPMRA_C_PO_EMPLOYEE</d:ID>
+                <d:Text>CDS.SEPMRA_C_PO_EMPLOYEE.SEPMRA_C_PO_Employee</d:Text>
+                <d:Occurrence>1</d:Occurrence>
+            </m:properties>
+        </content>
+    </entry>
+    <entry>
+        <id>https://SAPES5.SAPDEVCENTER.COM:443/sap/opu/odata/iwfnd/catalogservice;v=2/TagCollection('CDS.SEPMRA_C_PO_PRODUCT.SEPMRA_C_PO_PRODUCT')</id>
+        <title type="text">TagCollection('CDS.SEPMRA_C_PO_PRODUCT.SEPMRA_C_PO_PRODUCT')</title>
+        <updated>2024-06-17T12:32:14Z</updated>
+        <category term="catalogservice.Tag" scheme="http://schemas.microsoft.com/ado/2007/08/dataservices/scheme"/>
+        <link href="TagCollection('CDS.SEPMRA_C_PO_PRODUCT.SEPMRA_C_PO_PRODUCT')" rel="self" title="Tag"/>
+        <link href="TagCollection('CDS.SEPMRA_C_PO_PRODUCT.SEPMRA_C_PO_PRODUCT')/Services" rel="http://schemas.microsoft.com/ado/2007/08/dataservices/related/Services" type="application/atom+xml;type=feed" title="Services"/>
+        <content type="application/xml">
+            <m:properties xmlns:m="http://schemas.microsoft.com/ado/2007/08/dataservices/metadata" xmlns:d="http://schemas.microsoft.com/ado/2007/08/dataservices">
+                <d:ID>CDS.SEPMRA_C_PO_PRODUCT.SEPMRA_C_PO_PRODUCT</d:ID>
+                <d:Text>CDS.SEPMRA_C_PO_PRODUCT.SEPMRA_C_PO_Product</d:Text>
+                <d:Occurrence>1</d:Occurrence>
+            </m:properties>
+        </content>
+    </entry>
+    <entry>
+        <id>https://SAPES5.SAPDEVCENTER.COM:443/sap/opu/odata/iwfnd/catalogservice;v=2/TagCollection('CDS.SEPMRA_C_PO_PRODUCTVALUEHELP.SEPMRA_C_PO_PRODUCTVALUEHELP')</id>
+        <title type="text">TagCollection('CDS.SEPMRA_C_PO_PRODUCTVALUEHELP.SEPMRA_C_PO_PRODUCTVALUEHELP')</title>
+        <updated>2024-06-17T12:32:14Z</updated>
+        <category term="catalogservice.Tag" scheme="http://schemas.microsoft.com/ado/2007/08/dataservices/scheme"/>
+        <link href="TagCollection('CDS.SEPMRA_C_PO_PRODUCTVALUEHELP.SEPMRA_C_PO_PRODUCTVALUEHELP')" rel="self" title="Tag"/>
+        <link href="TagCollection('CDS.SEPMRA_C_PO_PRODUCTVALUEHELP.SEPMRA_C_PO_PRODUCTVALUEHELP')/Services" rel="http://schemas.microsoft.com/ado/2007/08/dataservices/related/Services" type="application/atom+xml;type=feed" title="Services"/>
+        <content type="application/xml">
+            <m:properties xmlns:m="http://schemas.microsoft.com/ado/2007/08/dataservices/metadata" xmlns:d="http://schemas.microsoft.com/ado/2007/08/dataservices">
+                <d:ID>CDS.SEPMRA_C_PO_PRODUCTVALUEHELP.SEPMRA_C_PO_PRODUCTVALUEHELP</d:ID>
+                <d:Text>CDS.SEPMRA_C_PO_PRODUCTVALUEHELP.SEPMRA_C_PO_ProductValueHelp</d:Text>
+                <d:Occurrence>1</d:Occurrence>
+            </m:properties>
+        </content>
+    </entry>
+    <entry>
+        <id>https://SAPES5.SAPDEVCENTER.COM:443/sap/opu/odata/iwfnd/catalogservice;v=2/TagCollection('CDS.SEPMRA_C_PO_PURORD.SEPMRA_C_PO_PURORD')</id>
+        <title type="text">TagCollection('CDS.SEPMRA_C_PO_PURORD.SEPMRA_C_PO_PURORD')</title>
+        <updated>2024-06-17T12:32:14Z</updated>
+        <category term="catalogservice.Tag" scheme="http://schemas.microsoft.com/ado/2007/08/dataservices/scheme"/>
+        <link href="TagCollection('CDS.SEPMRA_C_PO_PURORD.SEPMRA_C_PO_PURORD')" rel="self" title="Tag"/>
+        <link href="TagCollection('CDS.SEPMRA_C_PO_PURORD.SEPMRA_C_PO_PURORD')/Services" rel="http://schemas.microsoft.com/ado/2007/08/dataservices/related/Services" type="application/atom+xml;type=feed" title="Services"/>
+        <content type="application/xml">
+            <m:properties xmlns:m="http://schemas.microsoft.com/ado/2007/08/dataservices/metadata" xmlns:d="http://schemas.microsoft.com/ado/2007/08/dataservices">
+                <d:ID>CDS.SEPMRA_C_PO_PURORD.SEPMRA_C_PO_PURORD</d:ID>
+                <d:Text>CDS.SEPMRA_C_PO_PURORD.SEPMRA_C_PO_PurOrd</d:Text>
+                <d:Occurrence>1</d:Occurrence>
+            </m:properties>
+        </content>
+    </entry>
+    <entry>
+        <id>https://SAPES5.SAPDEVCENTER.COM:443/sap/opu/odata/iwfnd/catalogservice;v=2/TagCollection('CDS.SEPMRA_C_PO_PURORDITEM.SEPMRA_C_PO_PURORDITEM')</id>
+        <title type="text">TagCollection('CDS.SEPMRA_C_PO_PURORDITEM.SEPMRA_C_PO_PURORDITEM')</title>
+        <updated>2024-06-17T12:32:14Z</updated>
+        <category term="catalogservice.Tag" scheme="http://schemas.microsoft.com/ado/2007/08/dataservices/scheme"/>
+        <link href="TagCollection('CDS.SEPMRA_C_PO_PURORDITEM.SEPMRA_C_PO_PURORDITEM')" rel="self" title="Tag"/>
+        <link href="TagCollection('CDS.SEPMRA_C_PO_PURORDITEM.SEPMRA_C_PO_PURORDITEM')/Services" rel="http://schemas.microsoft.com/ado/2007/08/dataservices/related/Services" type="application/atom+xml;type=feed" title="Services"/>
+        <content type="application/xml">
+            <m:properties xmlns:m="http://schemas.microsoft.com/ado/2007/08/dataservices/metadata" xmlns:d="http://schemas.microsoft.com/ado/2007/08/dataservices">
+                <d:ID>CDS.SEPMRA_C_PO_PURORDITEM.SEPMRA_C_PO_PURORDITEM</d:ID>
+                <d:Text>CDS.SEPMRA_C_PO_PURORDITEM.SEPMRA_C_PO_PurOrdItem</d:Text>
+                <d:Occurrence>1</d:Occurrence>
+            </m:properties>
+        </content>
+    </entry>
+    <entry>
+        <id>https://SAPES5.SAPDEVCENTER.COM:443/sap/opu/odata/iwfnd/catalogservice;v=2/TagCollection('CDS.SEPMRA_C_PO_SUPPLIER.SEPMRA_C_PO_SUPPLIER')</id>
+        <title type="text">TagCollection('CDS.SEPMRA_C_PO_SUPPLIER.SEPMRA_C_PO_SUPPLIER')</title>
+        <updated>2024-06-17T12:32:14Z</updated>
+        <category term="catalogservice.Tag" scheme="http://schemas.microsoft.com/ado/2007/08/dataservices/scheme"/>
+        <link href="TagCollection('CDS.SEPMRA_C_PO_SUPPLIER.SEPMRA_C_PO_SUPPLIER')" rel="self" title="Tag"/>
+        <link href="TagCollection('CDS.SEPMRA_C_PO_SUPPLIER.SEPMRA_C_PO_SUPPLIER')/Services" rel="http://schemas.microsoft.com/ado/2007/08/dataservices/related/Services" type="application/atom+xml;type=feed" title="Services"/>
+        <content type="application/xml">
+            <m:properties xmlns:m="http://schemas.microsoft.com/ado/2007/08/dataservices/metadata" xmlns:d="http://schemas.microsoft.com/ado/2007/08/dataservices">
+                <d:ID>CDS.SEPMRA_C_PO_SUPPLIER.SEPMRA_C_PO_SUPPLIER</d:ID>
+                <d:Text>CDS.SEPMRA_C_PO_SUPPLIER.SEPMRA_C_PO_Supplier</d:Text>
+                <d:Occurrence>1</d:Occurrence>
+            </m:properties>
+        </content>
+    </entry>
+</feed>

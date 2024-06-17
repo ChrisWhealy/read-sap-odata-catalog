@@ -1,0 +1,213 @@
+<feed xmlns="http://www.w3.org/2005/Atom" xmlns:m="http://schemas.microsoft.com/ado/2007/08/dataservices/metadata" xmlns:d="http://schemas.microsoft.com/ado/2007/08/dataservices" xml:base="https://SAPES5.SAPDEVCENTER.COM:443/sap/opu/odata/iwfnd/catalogservice;v=2/">
+    <id>https://SAPES5.SAPDEVCENTER.COM:443/sap/opu/odata/iwfnd/catalogservice;v=2/EntitySetCollection</id>
+    <title type="text">EntitySetCollection</title>
+    <updated>2024-06-17T12:17:24Z</updated>
+    <author>
+        <name/>
+    </author>
+    <link href="EntitySetCollection" rel="self" title="EntitySetCollection"/>
+    <entry>
+        <id>https://SAPES5.SAPDEVCENTER.COM:443/sap/opu/odata/iwfnd/catalogservice;v=2/EntitySetCollection(ID='TAGS',SrvIdentifier='ZLAUNCHPAD_0001')</id>
+        <title type="text">EntitySetCollection(ID='TAGS',SrvIdentifier='ZLAUNCHPAD_0001')</title>
+        <updated>2024-06-17T12:17:24Z</updated>
+        <category term="catalogservice.EntitySet" scheme="http://schemas.microsoft.com/ado/2007/08/dataservices/scheme"/>
+        <link href="EntitySetCollection(ID='TAGS',SrvIdentifier='ZLAUNCHPAD_0001')" rel="self" title="EntitySet"/>
+        <link href="EntitySetCollection(ID='TAGS',SrvIdentifier='ZLAUNCHPAD_0001')/Service" rel="http://schemas.microsoft.com/ado/2007/08/dataservices/related/Service" type="application/atom+xml;type=entry" title="Service"/>
+        <content type="application/xml">
+            <m:properties xmlns:m="http://schemas.microsoft.com/ado/2007/08/dataservices/metadata" xmlns:d="http://schemas.microsoft.com/ado/2007/08/dataservices">
+                <d:ID>TAGS</d:ID>
+                <d:SrvIdentifier>ZLAUNCHPAD_0001</d:SrvIdentifier>
+                <d:Description>Tags</d:Description>
+                <d:TechnicalServiceName>LAUNCHPAD</d:TechnicalServiceName>
+                <d:TechnicalServiceVersion>0001</d:TechnicalServiceVersion>
+            </m:properties>
+        </content>
+    </entry>
+    <entry>
+        <id>https://SAPES5.SAPDEVCENTER.COM:443/sap/opu/odata/iwfnd/catalogservice;v=2/EntitySetCollection(ID='LINKS',SrvIdentifier='ZINTEROP_0001')</id>
+        <title type="text">EntitySetCollection(ID='LINKS',SrvIdentifier='ZINTEROP_0001')</title>
+        <updated>2024-06-17T12:17:24Z</updated>
+        <category term="catalogservice.EntitySet" scheme="http://schemas.microsoft.com/ado/2007/08/dataservices/scheme"/>
+        <link href="EntitySetCollection(ID='LINKS',SrvIdentifier='ZINTEROP_0001')" rel="self" title="EntitySet"/>
+        <link href="EntitySetCollection(ID='LINKS',SrvIdentifier='ZINTEROP_0001')/Service" rel="http://schemas.microsoft.com/ado/2007/08/dataservices/related/Service" type="application/atom+xml;type=entry" title="Service"/>
+        <content type="application/xml">
+            <m:properties xmlns:m="http://schemas.microsoft.com/ado/2007/08/dataservices/metadata" xmlns:d="http://schemas.microsoft.com/ado/2007/08/dataservices">
+                <d:ID>LINKS</d:ID>
+                <d:SrvIdentifier>ZINTEROP_0001</d:SrvIdentifier>
+                <d:Description>Links</d:Description>
+                <d:TechnicalServiceName>INTEROP</d:TechnicalServiceName>
+                <d:TechnicalServiceVersion>0001</d:TechnicalServiceVersion>
+            </m:properties>
+        </content>
+    </entry>
+    <entry>
+        <id>https://SAPES5.SAPDEVCENTER.COM:443/sap/opu/odata/iwfnd/catalogservice;v=2/EntitySetCollection(ID='BAGS',SrvIdentifier='ZFIORI_CATALOGS_0001')</id>
+        <title type="text">EntitySetCollection(ID='BAGS',SrvIdentifier='ZFIORI_CATALOGS_0001')</title>
+        <updated>2024-06-17T12:17:24Z</updated>
+        <category term="catalogservice.EntitySet" scheme="http://schemas.microsoft.com/ado/2007/08/dataservices/scheme"/>
+        <link href="EntitySetCollection(ID='BAGS',SrvIdentifier='ZFIORI_CATALOGS_0001')" rel="self" title="EntitySet"/>
+        <link href="EntitySetCollection(ID='BAGS',SrvIdentifier='ZFIORI_CATALOGS_0001')/Service" rel="http://schemas.microsoft.com/ado/2007/08/dataservices/related/Service" type="application/atom+xml;type=entry" title="Service"/>
+        <content type="application/xml">
+            <m:properties xmlns:m="http://schemas.microsoft.com/ado/2007/08/dataservices/metadata" xmlns:d="http://schemas.microsoft.com/ado/2007/08/dataservices">
+                <d:ID>BAGS</d:ID>
+                <d:SrvIdentifier>ZFIORI_CATALOGS_0001</d:SrvIdentifier>
+                <d:Description>Bags</d:Description>
+                <d:TechnicalServiceName>FIORI_CATALOGS</d:TechnicalServiceName>
+                <d:TechnicalServiceVersion>0001</d:TechnicalServiceVersion>
+            </m:properties>
+        </content>
+    </entry>
+    <entry>
+        <id>https://SAPES5.SAPDEVCENTER.COM:443/sap/opu/odata/iwfnd/catalogservice;v=2/EntitySetCollection(ID='ICONS',SrvIdentifier='ZLAUNCHPAD_0001')</id>
+        <title type="text">EntitySetCollection(ID='ICONS',SrvIdentifier='ZLAUNCHPAD_0001')</title>
+        <updated>2024-06-17T12:17:24Z</updated>
+        <category term="catalogservice.EntitySet" scheme="http://schemas.microsoft.com/ado/2007/08/dataservices/scheme"/>
+        <link href="EntitySetCollection(ID='ICONS',SrvIdentifier='ZLAUNCHPAD_0001')" rel="self" title="EntitySet"/>
+        <link href="EntitySetCollection(ID='ICONS',SrvIdentifier='ZLAUNCHPAD_0001')/Service" rel="http://schemas.microsoft.com/ado/2007/08/dataservices/related/Service" type="application/atom+xml;type=entry" title="Service"/>
+        <content type="application/xml">
+            <m:properties xmlns:m="http://schemas.microsoft.com/ado/2007/08/dataservices/metadata" xmlns:d="http://schemas.microsoft.com/ado/2007/08/dataservices">
+                <d:ID>ICONS</d:ID>
+                <d:SrvIdentifier>ZLAUNCHPAD_0001</d:SrvIdentifier>
+                <d:Description>Icons</d:Description>
+                <d:TechnicalServiceName>LAUNCHPAD</d:TechnicalServiceName>
+                <d:TechnicalServiceVersion>0001</d:TechnicalServiceVersion>
+            </m:properties>
+        </content>
+    </entry>
+    <entry>
+        <id>https://SAPES5.SAPDEVCENTER.COM:443/sap/opu/odata/iwfnd/catalogservice;v=2/EntitySetCollection(ID='LINKS',SrvIdentifier='ZLAUNCHPAD_0001')</id>
+        <title type="text">EntitySetCollection(ID='LINKS',SrvIdentifier='ZLAUNCHPAD_0001')</title>
+        <updated>2024-06-17T12:17:24Z</updated>
+        <category term="catalogservice.EntitySet" scheme="http://schemas.microsoft.com/ado/2007/08/dataservices/scheme"/>
+        <link href="EntitySetCollection(ID='LINKS',SrvIdentifier='ZLAUNCHPAD_0001')" rel="self" title="EntitySet"/>
+        <link href="EntitySetCollection(ID='LINKS',SrvIdentifier='ZLAUNCHPAD_0001')/Service" rel="http://schemas.microsoft.com/ado/2007/08/dataservices/related/Service" type="application/atom+xml;type=entry" title="Service"/>
+        <content type="application/xml">
+            <m:properties xmlns:m="http://schemas.microsoft.com/ado/2007/08/dataservices/metadata" xmlns:d="http://schemas.microsoft.com/ado/2007/08/dataservices">
+                <d:ID>LINKS</d:ID>
+                <d:SrvIdentifier>ZLAUNCHPAD_0001</d:SrvIdentifier>
+                <d:Description>Links</d:Description>
+                <d:TechnicalServiceName>LAUNCHPAD</d:TechnicalServiceName>
+                <d:TechnicalServiceVersion>0001</d:TechnicalServiceVersion>
+            </m:properties>
+        </content>
+    </entry>
+    <entry>
+        <id>https://SAPES5.SAPDEVCENTER.COM:443/sap/opu/odata/iwfnd/catalogservice;v=2/EntitySetCollection(ID='BAGS',SrvIdentifier='ZPAGE_BUILDER_CONF_0001')</id>
+        <title type="text">EntitySetCollection(ID='BAGS',SrvIdentifier='ZPAGE_BUILDER_CONF_0001')</title>
+        <updated>2024-06-17T12:17:24Z</updated>
+        <category term="catalogservice.EntitySet" scheme="http://schemas.microsoft.com/ado/2007/08/dataservices/scheme"/>
+        <link href="EntitySetCollection(ID='BAGS',SrvIdentifier='ZPAGE_BUILDER_CONF_0001')" rel="self" title="EntitySet"/>
+        <link href="EntitySetCollection(ID='BAGS',SrvIdentifier='ZPAGE_BUILDER_CONF_0001')/Service" rel="http://schemas.microsoft.com/ado/2007/08/dataservices/related/Service" type="application/atom+xml;type=entry" title="Service"/>
+        <content type="application/xml">
+            <m:properties xmlns:m="http://schemas.microsoft.com/ado/2007/08/dataservices/metadata" xmlns:d="http://schemas.microsoft.com/ado/2007/08/dataservices">
+                <d:ID>BAGS</d:ID>
+                <d:SrvIdentifier>ZPAGE_BUILDER_CONF_0001</d:SrvIdentifier>
+                <d:Description>Bags</d:Description>
+                <d:TechnicalServiceName>PAGE_BUILDER_CONF</d:TechnicalServiceName>
+                <d:TechnicalServiceVersion>0001</d:TechnicalServiceVersion>
+            </m:properties>
+        </content>
+    </entry>
+    <entry>
+        <id>https://SAPES5.SAPDEVCENTER.COM:443/sap/opu/odata/iwfnd/catalogservice;v=2/EntitySetCollection(ID='IMAGES',SrvIdentifier='ZSEPMRA_SHOP_0001')</id>
+        <title type="text">EntitySetCollection(ID='IMAGES',SrvIdentifier='ZSEPMRA_SHOP_0001')</title>
+        <updated>2024-06-17T12:17:24Z</updated>
+        <category term="catalogservice.EntitySet" scheme="http://schemas.microsoft.com/ado/2007/08/dataservices/scheme"/>
+        <link href="EntitySetCollection(ID='IMAGES',SrvIdentifier='ZSEPMRA_SHOP_0001')" rel="self" title="EntitySet"/>
+        <link href="EntitySetCollection(ID='IMAGES',SrvIdentifier='ZSEPMRA_SHOP_0001')/Service" rel="http://schemas.microsoft.com/ado/2007/08/dataservices/related/Service" type="application/atom+xml;type=entry" title="Service"/>
+        <content type="application/xml">
+            <m:properties xmlns:m="http://schemas.microsoft.com/ado/2007/08/dataservices/metadata" xmlns:d="http://schemas.microsoft.com/ado/2007/08/dataservices">
+                <d:ID>IMAGES</d:ID>
+                <d:SrvIdentifier>ZSEPMRA_SHOP_0001</d:SrvIdentifier>
+                <d:Description>Images</d:Description>
+                <d:TechnicalServiceName>SEPMRA_SHOP</d:TechnicalServiceName>
+                <d:TechnicalServiceVersion>0001</d:TechnicalServiceVersion>
+            </m:properties>
+        </content>
+    </entry>
+    <entry>
+        <id>https://SAPES5.SAPDEVCENTER.COM:443/sap/opu/odata/iwfnd/catalogservice;v=2/EntitySetCollection(ID='THEMES',SrvIdentifier='ZINTEROP_0001')</id>
+        <title type="text">EntitySetCollection(ID='THEMES',SrvIdentifier='ZINTEROP_0001')</title>
+        <updated>2024-06-17T12:17:24Z</updated>
+        <category term="catalogservice.EntitySet" scheme="http://schemas.microsoft.com/ado/2007/08/dataservices/scheme"/>
+        <link href="EntitySetCollection(ID='THEMES',SrvIdentifier='ZINTEROP_0001')" rel="self" title="EntitySet"/>
+        <link href="EntitySetCollection(ID='THEMES',SrvIdentifier='ZINTEROP_0001')/Service" rel="http://schemas.microsoft.com/ado/2007/08/dataservices/related/Service" type="application/atom+xml;type=entry" title="Service"/>
+        <content type="application/xml">
+            <m:properties xmlns:m="http://schemas.microsoft.com/ado/2007/08/dataservices/metadata" xmlns:d="http://schemas.microsoft.com/ado/2007/08/dataservices">
+                <d:ID>THEMES</d:ID>
+                <d:SrvIdentifier>ZINTEROP_0001</d:SrvIdentifier>
+                <d:Description>Themes</d:Description>
+                <d:TechnicalServiceName>INTEROP</d:TechnicalServiceName>
+                <d:TechnicalServiceVersion>0001</d:TechnicalServiceVersion>
+            </m:properties>
+        </content>
+    </entry>
+    <entry>
+        <id>https://SAPES5.SAPDEVCENTER.COM:443/sap/opu/odata/iwfnd/catalogservice;v=2/EntitySetCollection(ID='BAGS',SrvIdentifier='ZPAGE_BUILDER_PERS_0001')</id>
+        <title type="text">EntitySetCollection(ID='BAGS',SrvIdentifier='ZPAGE_BUILDER_PERS_0001')</title>
+        <updated>2024-06-17T12:17:24Z</updated>
+        <category term="catalogservice.EntitySet" scheme="http://schemas.microsoft.com/ado/2007/08/dataservices/scheme"/>
+        <link href="EntitySetCollection(ID='BAGS',SrvIdentifier='ZPAGE_BUILDER_PERS_0001')" rel="self" title="EntitySet"/>
+        <link href="EntitySetCollection(ID='BAGS',SrvIdentifier='ZPAGE_BUILDER_PERS_0001')/Service" rel="http://schemas.microsoft.com/ado/2007/08/dataservices/related/Service" type="application/atom+xml;type=entry" title="Service"/>
+        <content type="application/xml">
+            <m:properties xmlns:m="http://schemas.microsoft.com/ado/2007/08/dataservices/metadata" xmlns:d="http://schemas.microsoft.com/ado/2007/08/dataservices">
+                <d:ID>BAGS</d:ID>
+                <d:SrvIdentifier>ZPAGE_BUILDER_PERS_0001</d:SrvIdentifier>
+                <d:Description>Bags</d:Description>
+                <d:TechnicalServiceName>PAGE_BUILDER_PERS</d:TechnicalServiceName>
+                <d:TechnicalServiceVersion>0001</d:TechnicalServiceVersion>
+            </m:properties>
+        </content>
+    </entry>
+    <entry>
+        <id>https://SAPES5.SAPDEVCENTER.COM:443/sap/opu/odata/iwfnd/catalogservice;v=2/EntitySetCollection(ID='USERS',SrvIdentifier='ZESH_SEARCH_SRV_0001')</id>
+        <title type="text">EntitySetCollection(ID='USERS',SrvIdentifier='ZESH_SEARCH_SRV_0001')</title>
+        <updated>2024-06-17T12:17:24Z</updated>
+        <category term="catalogservice.EntitySet" scheme="http://schemas.microsoft.com/ado/2007/08/dataservices/scheme"/>
+        <link href="EntitySetCollection(ID='USERS',SrvIdentifier='ZESH_SEARCH_SRV_0001')" rel="self" title="EntitySet"/>
+        <link href="EntitySetCollection(ID='USERS',SrvIdentifier='ZESH_SEARCH_SRV_0001')/Service" rel="http://schemas.microsoft.com/ado/2007/08/dataservices/related/Service" type="application/atom+xml;type=entry" title="Service"/>
+        <content type="application/xml">
+            <m:properties xmlns:m="http://schemas.microsoft.com/ado/2007/08/dataservices/metadata" xmlns:d="http://schemas.microsoft.com/ado/2007/08/dataservices">
+                <d:ID>USERS</d:ID>
+                <d:SrvIdentifier>ZESH_SEARCH_SRV_0001</d:SrvIdentifier>
+                <d:Description>Users</d:Description>
+                <d:TechnicalServiceName>ESH_SEARCH_SRV</d:TechnicalServiceName>
+                <d:TechnicalServiceVersion>0001</d:TechnicalServiceVersion>
+            </m:properties>
+        </content>
+    </entry>
+    <entry>
+        <id>https://SAPES5.SAPDEVCENTER.COM:443/sap/opu/odata/iwfnd/catalogservice;v=2/EntitySetCollection(ID='PAGES',SrvIdentifier='ZFIORI_CATALOGS_0001')</id>
+        <title type="text">EntitySetCollection(ID='PAGES',SrvIdentifier='ZFIORI_CATALOGS_0001')</title>
+        <updated>2024-06-17T12:17:24Z</updated>
+        <category term="catalogservice.EntitySet" scheme="http://schemas.microsoft.com/ado/2007/08/dataservices/scheme"/>
+        <link href="EntitySetCollection(ID='PAGES',SrvIdentifier='ZFIORI_CATALOGS_0001')" rel="self" title="EntitySet"/>
+        <link href="EntitySetCollection(ID='PAGES',SrvIdentifier='ZFIORI_CATALOGS_0001')/Service" rel="http://schemas.microsoft.com/ado/2007/08/dataservices/related/Service" type="application/atom+xml;type=entry" title="Service"/>
+        <content type="application/xml">
+            <m:properties xmlns:m="http://schemas.microsoft.com/ado/2007/08/dataservices/metadata" xmlns:d="http://schemas.microsoft.com/ado/2007/08/dataservices">
+                <d:ID>PAGES</d:ID>
+                <d:SrvIdentifier>ZFIORI_CATALOGS_0001</d:SrvIdentifier>
+                <d:Description>Pages</d:Description>
+                <d:TechnicalServiceName>FIORI_CATALOGS</d:TechnicalServiceName>
+                <d:TechnicalServiceVersion>0001</d:TechnicalServiceVersion>
+            </m:properties>
+        </content>
+    </entry>
+    <entry>
+        <id>https://SAPES5.SAPDEVCENTER.COM:443/sap/opu/odata/iwfnd/catalogservice;v=2/EntitySetCollection(ID='CHIPS',SrvIdentifier='ZFIORI_CATALOGS_0001')</id>
+        <title type="text">EntitySetCollection(ID='CHIPS',SrvIdentifier='ZFIORI_CATALOGS_0001')</title>
+        <updated>2024-06-17T12:17:24Z</updated>
+        <category term="catalogservice.EntitySet" scheme="http://schemas.microsoft.com/ado/2007/08/dataservices/scheme"/>
+        <link href="EntitySetCollection(ID='CHIPS',SrvIdentifier='ZFIORI_CATALOGS_0001')" rel="self" title="EntitySet"/>
+        <link href="EntitySetCollection(ID='CHIPS',SrvIdentifier='ZFIORI_CATALOGS_0001')/Service" rel="http://schemas.microsoft.com/ado/2007/08/dataservices/related/Service" type="application/atom+xml;type=entry" title="Service"/>
+        <content type="application/xml">
+            <m:properties xmlns:m="http://schemas.microsoft.com/ado/2007/08/dataservices/metadata" xmlns:d="http://schemas.microsoft.com/ado/2007/08/dataservices">
+                <d:ID>CHIPS</d:ID>
+                <d:SrvIdentifier>ZFIORI_CATALOGS_0001</d:SrvIdentifier>
+                <d:Description>Chips</d:Description>
+                <d:TechnicalServiceName>FIORI_CATALOGS</d:TechnicalServiceName>
+                <d:TechnicalServiceVersion>0001</d:TechnicalServiceVersion>
+            </m:properties>
+        </content>
+    </entry>
+</feed>

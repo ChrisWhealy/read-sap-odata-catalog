@@ -1,0 +1,249 @@
+<feed xmlns="http://www.w3.org/2005/Atom" xmlns:m="http://schemas.microsoft.com/ado/2007/08/dataservices/metadata" xmlns:d="http://schemas.microsoft.com/ado/2007/08/dataservices" xml:base="https://SAPES5.SAPDEVCENTER.COM:443/sap/opu/odata/iwfnd/catalogservice;v=2/">
+    <id>https://SAPES5.SAPDEVCENTER.COM:443/sap/opu/odata/iwfnd/catalogservice;v=2/Annotations</id>
+    <title type="text">Annotations</title>
+    <updated>2024-06-14T16:17:29Z</updated>
+    <author>
+        <name/>
+    </author>
+    <link href="Annotations" rel="self" title="Annotations"/>
+    <entry>
+        <id>https://SAPES5.SAPDEVCENTER.COM:443/sap/opu/odata/iwfnd/catalogservice;v=2/Annotations(TechnicalName='ZPDCDS_ANNO_MDL',Version='0001')</id>
+        <title type="text">Annotations(TechnicalName='ZPDCDS_ANNO_MDL',Version='0001')</title>
+        <updated>2024-06-14T16:17:29Z</updated>
+        <category term="catalogservice.Annotation" scheme="http://schemas.microsoft.com/ado/2007/08/dataservices/scheme"/>
+        <link href="Annotations(TechnicalName='ZPDCDS_ANNO_MDL',Version='0001')" rel="self" title="Annotation"/>
+        <link href="Annotations(TechnicalName='ZPDCDS_ANNO_MDL',Version='0001')/Services" rel="http://schemas.microsoft.com/ado/2007/08/dataservices/related/Services" type="application/atom+xml;type=feed" title="Services"/>
+        <content type="application/xml" src="Annotations(TechnicalName='ZPDCDS_ANNO_MDL',Version='0001')/$value"/>
+        <m:properties xmlns:m="http://schemas.microsoft.com/ado/2007/08/dataservices/metadata" xmlns:d="http://schemas.microsoft.com/ado/2007/08/dataservices">
+            <d:TechnicalName>ZPDCDS_ANNO_MDL</d:TechnicalName>
+            <d:Version>0001</d:Version>
+            <d:Description>Generic Annotation Provider</d:Description>
+            <d:MediaType>application/xml</d:MediaType>
+        </m:properties>
+    </entry>
+    <entry>
+        <id>https://SAPES5.SAPDEVCENTER.COM:443/sap/opu/odata/iwfnd/catalogservice;v=2/Annotations(TechnicalName='ZSOCDS_ANNO_MDL',Version='0001')</id>
+        <title type="text">Annotations(TechnicalName='ZSOCDS_ANNO_MDL',Version='0001')</title>
+        <updated>2024-06-14T16:17:29Z</updated>
+        <category term="catalogservice.Annotation" scheme="http://schemas.microsoft.com/ado/2007/08/dataservices/scheme"/>
+        <link href="Annotations(TechnicalName='ZSOCDS_ANNO_MDL',Version='0001')" rel="self" title="Annotation"/>
+        <link href="Annotations(TechnicalName='ZSOCDS_ANNO_MDL',Version='0001')/Services" rel="http://schemas.microsoft.com/ado/2007/08/dataservices/related/Services" type="application/atom+xml;type=feed" title="Services"/>
+        <content type="application/xml" src="Annotations(TechnicalName='ZSOCDS_ANNO_MDL',Version='0001')/$value"/>
+        <m:properties xmlns:m="http://schemas.microsoft.com/ado/2007/08/dataservices/metadata" xmlns:d="http://schemas.microsoft.com/ado/2007/08/dataservices">
+            <d:TechnicalName>ZSOCDS_ANNO_MDL</d:TechnicalName>
+            <d:Version>0001</d:Version>
+            <d:Description>Generic Annotation Provider</d:Description>
+            <d:MediaType>application/xml</d:MediaType>
+        </m:properties>
+    </entry>
+    <entry>
+        <id>https://SAPES5.SAPDEVCENTER.COM:443/sap/opu/odata/iwfnd/catalogservice;v=2/Annotations(TechnicalName='ESH_FL_FTASK_DDL',Version='0001')</id>
+        <title type="text">Annotations(TechnicalName='ESH_FL_FTASK_DDL',Version='0001')</title>
+        <updated>2024-06-14T16:17:29Z</updated>
+        <category term="catalogservice.Annotation" scheme="http://schemas.microsoft.com/ado/2007/08/dataservices/scheme"/>
+        <link href="Annotations(TechnicalName='ESH_FL_FTASK_DDL',Version='0001')" rel="self" title="Annotation"/>
+        <link href="Annotations(TechnicalName='ESH_FL_FTASK_DDL',Version='0001')/Services" rel="http://schemas.microsoft.com/ado/2007/08/dataservices/related/Services" type="application/atom+xml;type=feed" title="Services"/>
+        <content type="application/xml" src="Annotations(TechnicalName='ESH_FL_FTASK_DDL',Version='0001')/$value"/>
+        <m:properties xmlns:m="http://schemas.microsoft.com/ado/2007/08/dataservices/metadata" xmlns:d="http://schemas.microsoft.com/ado/2007/08/dataservices">
+            <d:TechnicalName>ESH_FL_FTASK_DDL</d:TechnicalName>
+            <d:Version>0001</d:Version>
+            <d:Description>Generic Annotation Provider</d:Description>
+            <d:MediaType>application/xml</d:MediaType>
+        </m:properties>
+    </entry>
+    <entry>
+        <id>https://SAPES5.SAPDEVCENTER.COM:443/sap/opu/odata/iwfnd/catalogservice;v=2/Annotations(TechnicalName='ZAGENCYCDS_ANNO_MDL',Version='0001')</id>
+        <title type="text">Annotations(TechnicalName='ZAGENCYCDS_ANNO_MDL',Version='0001')</title>
+        <updated>2024-06-14T16:17:29Z</updated>
+        <category term="catalogservice.Annotation" scheme="http://schemas.microsoft.com/ado/2007/08/dataservices/scheme"/>
+        <link href="Annotations(TechnicalName='ZAGENCYCDS_ANNO_MDL',Version='0001')" rel="self" title="Annotation"/>
+        <link href="Annotations(TechnicalName='ZAGENCYCDS_ANNO_MDL',Version='0001')/Services" rel="http://schemas.microsoft.com/ado/2007/08/dataservices/related/Services" type="application/atom+xml;type=feed" title="Services"/>
+        <content type="application/xml" src="Annotations(TechnicalName='ZAGENCYCDS_ANNO_MDL',Version='0001')/$value"/>
+        <m:properties xmlns:m="http://schemas.microsoft.com/ado/2007/08/dataservices/metadata" xmlns:d="http://schemas.microsoft.com/ado/2007/08/dataservices">
+            <d:TechnicalName>ZAGENCYCDS_ANNO_MDL</d:TechnicalName>
+            <d:Version>0001</d:Version>
+            <d:Description>Generic Annotation Provider</d:Description>
+            <d:MediaType>application/xml</d:MediaType>
+        </m:properties>
+    </entry>
+    <entry>
+        <id>https://SAPES5.SAPDEVCENTER.COM:443/sap/opu/odata/iwfnd/catalogservice;v=2/Annotations(TechnicalName='SEPMRA_OVW_ANNO_MDL',Version='0001')</id>
+        <title type="text">Annotations(TechnicalName='SEPMRA_OVW_ANNO_MDL',Version='0001')</title>
+        <updated>2024-06-14T16:17:29Z</updated>
+        <category term="catalogservice.Annotation" scheme="http://schemas.microsoft.com/ado/2007/08/dataservices/scheme"/>
+        <link href="Annotations(TechnicalName='SEPMRA_OVW_ANNO_MDL',Version='0001')" rel="self" title="Annotation"/>
+        <link href="Annotations(TechnicalName='SEPMRA_OVW_ANNO_MDL',Version='0001')/Services" rel="http://schemas.microsoft.com/ado/2007/08/dataservices/related/Services" type="application/atom+xml;type=feed" title="Services"/>
+        <content type="application/xml" src="Annotations(TechnicalName='SEPMRA_OVW_ANNO_MDL',Version='0001')/$value"/>
+        <m:properties xmlns:m="http://schemas.microsoft.com/ado/2007/08/dataservices/metadata" xmlns:d="http://schemas.microsoft.com/ado/2007/08/dataservices">
+            <d:TechnicalName>SEPMRA_OVW_ANNO_MDL</d:TechnicalName>
+            <d:Version>0001</d:Version>
+            <d:Description>Generic Annotation Provider</d:Description>
+            <d:MediaType>application/xml</d:MediaType>
+        </m:properties>
+    </entry>
+    <entry>
+        <id>https://SAPES5.SAPDEVCENTER.COM:443/sap/opu/odata/iwfnd/catalogservice;v=2/Annotations(TechnicalName='SEPMRA_SHOP_ANNO_MDL',Version='0001')</id>
+        <title type="text">Annotations(TechnicalName='SEPMRA_SHOP_ANNO_MDL',Version='0001')</title>
+        <updated>2024-06-14T16:17:29Z</updated>
+        <category term="catalogservice.Annotation" scheme="http://schemas.microsoft.com/ado/2007/08/dataservices/scheme"/>
+        <link href="Annotations(TechnicalName='SEPMRA_SHOP_ANNO_MDL',Version='0001')" rel="self" title="Annotation"/>
+        <link href="Annotations(TechnicalName='SEPMRA_SHOP_ANNO_MDL',Version='0001')/Services" rel="http://schemas.microsoft.com/ado/2007/08/dataservices/related/Services" type="application/atom+xml;type=feed" title="Services"/>
+        <content type="application/xml" src="Annotations(TechnicalName='SEPMRA_SHOP_ANNO_MDL',Version='0001')/$value"/>
+        <m:properties xmlns:m="http://schemas.microsoft.com/ado/2007/08/dataservices/metadata" xmlns:d="http://schemas.microsoft.com/ado/2007/08/dataservices">
+            <d:TechnicalName>SEPMRA_SHOP_ANNO_MDL</d:TechnicalName>
+            <d:Version>0001</d:Version>
+            <d:Description>Generic Annotation Provider</d:Description>
+            <d:MediaType>application/xml</d:MediaType>
+        </m:properties>
+    </entry>
+    <entry>
+        <id>https://SAPES5.SAPDEVCENTER.COM:443/sap/opu/odata/iwfnd/catalogservice;v=2/Annotations(TechnicalName='ZE2E100_SOL_2_ANNO_MDL',Version='0001')</id>
+        <title type="text">Annotations(TechnicalName='ZE2E100_SOL_2_ANNO_MDL',Version='0001')</title>
+        <updated>2024-06-14T16:17:29Z</updated>
+        <category term="catalogservice.Annotation" scheme="http://schemas.microsoft.com/ado/2007/08/dataservices/scheme"/>
+        <link href="Annotations(TechnicalName='ZE2E100_SOL_2_ANNO_MDL',Version='0001')" rel="self" title="Annotation"/>
+        <link href="Annotations(TechnicalName='ZE2E100_SOL_2_ANNO_MDL',Version='0001')/Services" rel="http://schemas.microsoft.com/ado/2007/08/dataservices/related/Services" type="application/atom+xml;type=feed" title="Services"/>
+        <content type="application/xml" src="Annotations(TechnicalName='ZE2E100_SOL_2_ANNO_MDL',Version='0001')/$value"/>
+        <m:properties xmlns:m="http://schemas.microsoft.com/ado/2007/08/dataservices/metadata" xmlns:d="http://schemas.microsoft.com/ado/2007/08/dataservices">
+            <d:TechnicalName>ZE2E100_SOL_2_ANNO_MDL</d:TechnicalName>
+            <d:Version>0001</d:Version>
+            <d:Description>Generic Annotation Provider</d:Description>
+            <d:MediaType>application/xml</d:MediaType>
+        </m:properties>
+    </entry>
+    <entry>
+        <id>https://SAPES5.SAPDEVCENTER.COM:443/sap/opu/odata/iwfnd/catalogservice;v=2/Annotations(TechnicalName='SEPMRA_PO_MAN_ANNO_MDL',Version='0001')</id>
+        <title type="text">Annotations(TechnicalName='SEPMRA_PO_MAN_ANNO_MDL',Version='0001')</title>
+        <updated>2024-06-14T16:17:29Z</updated>
+        <category term="catalogservice.Annotation" scheme="http://schemas.microsoft.com/ado/2007/08/dataservices/scheme"/>
+        <link href="Annotations(TechnicalName='SEPMRA_PO_MAN_ANNO_MDL',Version='0001')" rel="self" title="Annotation"/>
+        <link href="Annotations(TechnicalName='SEPMRA_PO_MAN_ANNO_MDL',Version='0001')/Services" rel="http://schemas.microsoft.com/ado/2007/08/dataservices/related/Services" type="application/atom+xml;type=feed" title="Services"/>
+        <content type="application/xml" src="Annotations(TechnicalName='SEPMRA_PO_MAN_ANNO_MDL',Version='0001')/$value"/>
+        <m:properties xmlns:m="http://schemas.microsoft.com/ado/2007/08/dataservices/metadata" xmlns:d="http://schemas.microsoft.com/ado/2007/08/dataservices">
+            <d:TechnicalName>SEPMRA_PO_MAN_ANNO_MDL</d:TechnicalName>
+            <d:Version>0001</d:Version>
+            <d:Description>Generic Annotation Provider</d:Description>
+            <d:MediaType>application/xml</d:MediaType>
+        </m:properties>
+    </entry>
+    <entry>
+        <id>https://SAPES5.SAPDEVCENTER.COM:443/sap/opu/odata/iwfnd/catalogservice;v=2/Annotations(TechnicalName='SEPMRA_SO_MAN_ANNO_MDL',Version='0001')</id>
+        <title type="text">Annotations(TechnicalName='SEPMRA_SO_MAN_ANNO_MDL',Version='0001')</title>
+        <updated>2024-06-14T16:17:29Z</updated>
+        <category term="catalogservice.Annotation" scheme="http://schemas.microsoft.com/ado/2007/08/dataservices/scheme"/>
+        <link href="Annotations(TechnicalName='SEPMRA_SO_MAN_ANNO_MDL',Version='0001')" rel="self" title="Annotation"/>
+        <link href="Annotations(TechnicalName='SEPMRA_SO_MAN_ANNO_MDL',Version='0001')/Services" rel="http://schemas.microsoft.com/ado/2007/08/dataservices/related/Services" type="application/atom+xml;type=feed" title="Services"/>
+        <content type="application/xml" src="Annotations(TechnicalName='SEPMRA_SO_MAN_ANNO_MDL',Version='0001')/$value"/>
+        <m:properties xmlns:m="http://schemas.microsoft.com/ado/2007/08/dataservices/metadata" xmlns:d="http://schemas.microsoft.com/ado/2007/08/dataservices">
+            <d:TechnicalName>SEPMRA_SO_MAN_ANNO_MDL</d:TechnicalName>
+            <d:Version>0001</d:Version>
+            <d:Description>Generic Annotation Provider</d:Description>
+            <d:MediaType>application/xml</d:MediaType>
+        </m:properties>
+    </entry>
+    <entry>
+        <id>https://SAPES5.SAPDEVCENTER.COM:443/sap/opu/odata/iwfnd/catalogservice;v=2/Annotations(TechnicalName='SEPMRA_PO_APV_ANNO_MDL',Version='0001')</id>
+        <title type="text">Annotations(TechnicalName='SEPMRA_PO_APV_ANNO_MDL',Version='0001')</title>
+        <updated>2024-06-14T16:17:29Z</updated>
+        <category term="catalogservice.Annotation" scheme="http://schemas.microsoft.com/ado/2007/08/dataservices/scheme"/>
+        <link href="Annotations(TechnicalName='SEPMRA_PO_APV_ANNO_MDL',Version='0001')" rel="self" title="Annotation"/>
+        <link href="Annotations(TechnicalName='SEPMRA_PO_APV_ANNO_MDL',Version='0001')/Services" rel="http://schemas.microsoft.com/ado/2007/08/dataservices/related/Services" type="application/atom+xml;type=feed" title="Services"/>
+        <content type="application/xml" src="Annotations(TechnicalName='SEPMRA_PO_APV_ANNO_MDL',Version='0001')/$value"/>
+        <m:properties xmlns:m="http://schemas.microsoft.com/ado/2007/08/dataservices/metadata" xmlns:d="http://schemas.microsoft.com/ado/2007/08/dataservices">
+            <d:TechnicalName>SEPMRA_PO_APV_ANNO_MDL</d:TechnicalName>
+            <d:Version>0001</d:Version>
+            <d:Description>Generic Annotation Provider</d:Description>
+            <d:MediaType>application/xml</d:MediaType>
+        </m:properties>
+    </entry>
+    <entry>
+        <id>https://SAPES5.SAPDEVCENTER.COM:443/sap/opu/odata/iwfnd/catalogservice;v=2/Annotations(TechnicalName='SEPMRA_GR_POST_ANNO_MDL',Version='0001')</id>
+        <title type="text">Annotations(TechnicalName='SEPMRA_GR_POST_ANNO_MDL',Version='0001')</title>
+        <updated>2024-06-14T16:17:29Z</updated>
+        <category term="catalogservice.Annotation" scheme="http://schemas.microsoft.com/ado/2007/08/dataservices/scheme"/>
+        <link href="Annotations(TechnicalName='SEPMRA_GR_POST_ANNO_MDL',Version='0001')" rel="self" title="Annotation"/>
+        <link href="Annotations(TechnicalName='SEPMRA_GR_POST_ANNO_MDL',Version='0001')/Services" rel="http://schemas.microsoft.com/ado/2007/08/dataservices/related/Services" type="application/atom+xml;type=feed" title="Services"/>
+        <content type="application/xml" src="Annotations(TechnicalName='SEPMRA_GR_POST_ANNO_MDL',Version='0001')/$value"/>
+        <m:properties xmlns:m="http://schemas.microsoft.com/ado/2007/08/dataservices/metadata" xmlns:d="http://schemas.microsoft.com/ado/2007/08/dataservices">
+            <d:TechnicalName>SEPMRA_GR_POST_ANNO_MDL</d:TechnicalName>
+            <d:Version>0001</d:Version>
+            <d:Description>Generic Annotation Provider</d:Description>
+            <d:MediaType>application/xml</d:MediaType>
+        </m:properties>
+    </entry>
+    <entry>
+        <id>https://SAPES5.SAPDEVCENTER.COM:443/sap/opu/odata/iwfnd/catalogservice;v=2/Annotations(TechnicalName='SEPMRA_PROD_MAN_ANNO_MDL',Version='0001')</id>
+        <title type="text">Annotations(TechnicalName='SEPMRA_PROD_MAN_ANNO_MDL',Version='0001')</title>
+        <updated>2024-06-14T16:17:29Z</updated>
+        <category term="catalogservice.Annotation" scheme="http://schemas.microsoft.com/ado/2007/08/dataservices/scheme"/>
+        <link href="Annotations(TechnicalName='SEPMRA_PROD_MAN_ANNO_MDL',Version='0001')" rel="self" title="Annotation"/>
+        <link href="Annotations(TechnicalName='SEPMRA_PROD_MAN_ANNO_MDL',Version='0001')/Services" rel="http://schemas.microsoft.com/ado/2007/08/dataservices/related/Services" type="application/atom+xml;type=feed" title="Services"/>
+        <content type="application/xml" src="Annotations(TechnicalName='SEPMRA_PROD_MAN_ANNO_MDL',Version='0001')/$value"/>
+        <m:properties xmlns:m="http://schemas.microsoft.com/ado/2007/08/dataservices/metadata" xmlns:d="http://schemas.microsoft.com/ado/2007/08/dataservices">
+            <d:TechnicalName>SEPMRA_PROD_MAN_ANNO_MDL</d:TechnicalName>
+            <d:Version>0001</d:Version>
+            <d:Description>Generic Annotation Provider</d:Description>
+            <d:MediaType>application/xml</d:MediaType>
+        </m:properties>
+    </entry>
+    <entry>
+        <id>https://SAPES5.SAPDEVCENTER.COM:443/sap/opu/odata/iwfnd/catalogservice;v=2/Annotations(TechnicalName='SGBT_NTE_CDS_API_ANNO_MDL',Version='0001')</id>
+        <title type="text">Annotations(TechnicalName='SGBT_NTE_CDS_API_ANNO_MDL',Version='0001')</title>
+        <updated>2024-06-14T16:17:29Z</updated>
+        <category term="catalogservice.Annotation" scheme="http://schemas.microsoft.com/ado/2007/08/dataservices/scheme"/>
+        <link href="Annotations(TechnicalName='SGBT_NTE_CDS_API_ANNO_MDL',Version='0001')" rel="self" title="Annotation"/>
+        <link href="Annotations(TechnicalName='SGBT_NTE_CDS_API_ANNO_MDL',Version='0001')/Services" rel="http://schemas.microsoft.com/ado/2007/08/dataservices/related/Services" type="application/atom+xml;type=feed" title="Services"/>
+        <content type="application/xml" src="Annotations(TechnicalName='SGBT_NTE_CDS_API_ANNO_MDL',Version='0001')/$value"/>
+        <m:properties xmlns:m="http://schemas.microsoft.com/ado/2007/08/dataservices/metadata" xmlns:d="http://schemas.microsoft.com/ado/2007/08/dataservices">
+            <d:TechnicalName>SGBT_NTE_CDS_API_ANNO_MDL</d:TechnicalName>
+            <d:Version>0001</d:Version>
+            <d:Description>Generic Annotation Provider</d:Description>
+            <d:MediaType>application/xml</d:MediaType>
+        </m:properties>
+    </entry>
+    <entry>
+        <id>https://SAPES5.SAPDEVCENTER.COM:443/sap/opu/odata/iwfnd/catalogservice;v=2/Annotations(TechnicalName='SGBT_NTE_CDS_API_D_ANNO_MDL',Version='0001')</id>
+        <title type="text">Annotations(TechnicalName='SGBT_NTE_CDS_API_D_ANNO_MDL',Version='0001')</title>
+        <updated>2024-06-14T16:17:29Z</updated>
+        <category term="catalogservice.Annotation" scheme="http://schemas.microsoft.com/ado/2007/08/dataservices/scheme"/>
+        <link href="Annotations(TechnicalName='SGBT_NTE_CDS_API_D_ANNO_MDL',Version='0001')" rel="self" title="Annotation"/>
+        <link href="Annotations(TechnicalName='SGBT_NTE_CDS_API_D_ANNO_MDL',Version='0001')/Services" rel="http://schemas.microsoft.com/ado/2007/08/dataservices/related/Services" type="application/atom+xml;type=feed" title="Services"/>
+        <content type="application/xml" src="Annotations(TechnicalName='SGBT_NTE_CDS_API_D_ANNO_MDL',Version='0001')/$value"/>
+        <m:properties xmlns:m="http://schemas.microsoft.com/ado/2007/08/dataservices/metadata" xmlns:d="http://schemas.microsoft.com/ado/2007/08/dataservices">
+            <d:TechnicalName>SGBT_NTE_CDS_API_D_ANNO_MDL</d:TechnicalName>
+            <d:Version>0001</d:Version>
+            <d:Description>Generic Annotation Provider</d:Description>
+            <d:MediaType>application/xml</d:MediaType>
+        </m:properties>
+    </entry>
+    <entry>
+        <id>https://SAPES5.SAPDEVCENTER.COM:443/sap/opu/odata/iwfnd/catalogservice;v=2/Annotations(TechnicalName='Z_TEST_CDS_WITH_PARAM_ANNO_MDL',Version='0001')</id>
+        <title type="text">Annotations(TechnicalName='Z_TEST_CDS_WITH_PARAM_ANNO_MDL',Version='0001')</title>
+        <updated>2024-06-14T16:17:29Z</updated>
+        <category term="catalogservice.Annotation" scheme="http://schemas.microsoft.com/ado/2007/08/dataservices/scheme"/>
+        <link href="Annotations(TechnicalName='Z_TEST_CDS_WITH_PARAM_ANNO_MDL',Version='0001')" rel="self" title="Annotation"/>
+        <link href="Annotations(TechnicalName='Z_TEST_CDS_WITH_PARAM_ANNO_MDL',Version='0001')/Services" rel="http://schemas.microsoft.com/ado/2007/08/dataservices/related/Services" type="application/atom+xml;type=feed" title="Services"/>
+        <content type="application/xml" src="Annotations(TechnicalName='Z_TEST_CDS_WITH_PARAM_ANNO_MDL',Version='0001')/$value"/>
+        <m:properties xmlns:m="http://schemas.microsoft.com/ado/2007/08/dataservices/metadata" xmlns:d="http://schemas.microsoft.com/ado/2007/08/dataservices">
+            <d:TechnicalName>Z_TEST_CDS_WITH_PARAM_ANNO_MDL</d:TechnicalName>
+            <d:Version>0001</d:Version>
+            <d:Description>Generic Annotation Provider</d:Description>
+            <d:MediaType>application/xml</d:MediaType>
+        </m:properties>
+    </entry>
+    <entry>
+        <id>https://SAPES5.SAPDEVCENTER.COM:443/sap/opu/odata/iwfnd/catalogservice;v=2/Annotations(TechnicalName='%2FIWBEP%2FTEA_TEST_ANNOTATION_FILE',Version='0001')</id>
+        <title type="text">Annotations(TechnicalName='%2FIWBEP%2FTEA_TEST_ANNOTATION_FILE',Version='0001')</title>
+        <updated>2024-06-14T16:17:29Z</updated>
+        <category term="catalogservice.Annotation" scheme="http://schemas.microsoft.com/ado/2007/08/dataservices/scheme"/>
+        <link href="Annotations(TechnicalName='%2FIWBEP%2FTEA_TEST_ANNOTATION_FILE',Version='0001')" rel="self" title="Annotation"/>
+        <link href="Annotations(TechnicalName='%2FIWBEP%2FTEA_TEST_ANNOTATION_FILE',Version='0001')/Services" rel="http://schemas.microsoft.com/ado/2007/08/dataservices/related/Services" type="application/atom+xml;type=feed" title="Services"/>
+        <content type="application/xml" src="Annotations(TechnicalName='%2FIWBEP%2FTEA_TEST_ANNOTATION_FILE',Version='0001')/$value"/>
+        <m:properties xmlns:m="http://schemas.microsoft.com/ado/2007/08/dataservices/metadata" xmlns:d="http://schemas.microsoft.com/ado/2007/08/dataservices">
+            <d:TechnicalName>/IWBEP/TEA_TEST_ANNOTATION_FILE</d:TechnicalName>
+            <d:Version>0001</d:Version>
+            <d:Description>Test Application TEA Annotation file. No semantics here.</d:Description>
+            <d:MediaType>application/xml</d:MediaType>
+        </m:properties>
+    </entry>
+</feed>

@@ -1,0 +1,33 @@
+[package]
+name = "read-sap-odata-catalog"
+version = "0.1.0"
+edition = "2021"
+authors = ["Chris Whealy <chris@whealy.com>"]
+description = "List OData services available from sape5.sapdevcenter.com"
+keywords = ["odata", "sap", "parser", "opendata", "catalogservice"]
+repository = "https://github.com/ChrisWhealy/read-sap-odata-catalog"
+license = "MIT"
+
+[build-dependencies]
+parse-sap-odata = { version = "1.2", features = ["parser"]}
+#parse-sap-odata = { path = "../parse-sap-odata", features = ["parser"]}
+
+[dependencies]
+actix-web = "4.7"
+actix-rt = "2.10"
+base64 = "0.22"
+chrono = { version = "0.4", features = ["serde"]}
+env_logger = "0.11"
+log = "0.4"
+quick-xml = { version = "0.32", features = ["serialize"] }
+regex = "1.10"
+reqwest = { version = "0.12", features = ["json"]}
+parse-sap-atom-feed = "0.2"
+#parse-sap-atom-feed = { path = "../parse-sap-atom-feed" }
+paste = "1.0"
+rust_decimal = { version = "1", features = ["serde-with-str"]}
+serde = { version = "1.0", features = ["derive"] }
+serde_json = "1.0"
+tinytemplate = "1.2"
+uuid = { version = "1.8", features = ["serde"]}
+url = "2.5"
