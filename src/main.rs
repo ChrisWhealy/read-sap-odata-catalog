@@ -187,7 +187,7 @@ async fn catalog_services<'template>(
                 ),
             );
 
-            log::info!("<--- catalog_services()");
+            log::error!("<--- catalog_services() ERROR");
             return Ok(build_http_response(StatusCode::OK, tmpl, ctx, true));
         }
     };
@@ -201,7 +201,7 @@ async fn catalog_services<'template>(
             Some(format!("No services found: {}", services_feed.id).as_ref()),
         );
 
-        log::info!("<--- catalog_services()");
+        log::error!("<--- catalog_services() ERROR");
         return Ok(build_http_response(StatusCode::OK, tmpl, ctx, true));
     }
 
@@ -244,7 +244,7 @@ async fn fetch_metadata<'template>(
         Ok(auth_chars) => auth_chars,
         Err(err) => {
             let ctx = set_context(str::from_utf8(HOST_NAME).unwrap(), None, None, Some(&err));
-            log::info!("<--- fetch_metadata() ERROR");
+            log::error!("<--- fetch_metadata() ERROR");
             return Ok(build_http_response(StatusCode::OK, tmpl, ctx, true));
         }
     };
@@ -265,7 +265,7 @@ async fn fetch_metadata<'template>(
                 None,
                 Some(&err.to_string()),
             );
-            log::info!("<--- fetch_metadata() ERROR");
+            log::error!("<--- fetch_metadata() ERROR");
             return Ok(build_http_response(
                 StatusCode::from_u16(err.status().unwrap().as_u16()).unwrap(),
                 tmpl,
@@ -294,7 +294,7 @@ async fn fetch_metadata<'template>(
                 None,
                 Some(&parse_odata_error(&raw_xml)),
             );
-            log::info!("<--- fetch_metadata() ERROR");
+            log::error!("<--- fetch_metadata() ERROR");
             Ok(build_http_response(http_status_code, tmpl, ctx, true))
         }
         _ => {
@@ -304,7 +304,7 @@ async fn fetch_metadata<'template>(
                 None,
                 Some(&raw_xml),
             );
-            log::info!("<--- fetch_metadata() ERROR");
+            log::error!("<--- fetch_metadata() ERROR");
             Ok(build_http_response(http_status_code, tmpl, ctx, true))
         }
     }
@@ -335,7 +335,7 @@ where
     {
         Ok(response) => response,
         Err(e) => {
-            log::info!("<--- fetch_feed<T>()");
+            log::error!("<--- fetch_feed<T>() ERROR in HTTP Request");
             return Err(anyhow!(e));
         }
     };
@@ -345,13 +345,21 @@ where
 
     let raw_xml = response.text().await.unwrap();
 
-    log::info!("<--- fetch_feed<T>()");
     match http_status_code {
         reqwest::StatusCode::OK => match Feed::<T>::from_str(&raw_xml) {
-            Ok(feed) => Ok(feed),
-            Err(e) => Err(anyhow!(e)),
+            Ok(feed) => {
+                log::info!("<--- fetch_feed<T>()");
+                Ok(feed)
+            }
+            Err(e) => {
+                log::error!("<--- fetch_feed<T>() ERROR in XML deserialization");
+                Err(anyhow!(e))
+            }
         },
-        _ => Err(anyhow!(parse_odata_error(&raw_xml))),
+        _ => {
+            log::error!("<--- fetch_feed<T>() ERROR {}", http_status_code);
+            Err(anyhow!(parse_odata_error(&raw_xml)))
+        }
     }
 }
 
