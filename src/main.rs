@@ -30,6 +30,15 @@ static HOST_PATH: &[u8] = "/sap/opu/odata/iwfnd".as_bytes();
 static SERVICE_NAME: &[u8] = "catalogservice;v=2".as_bytes();
 
 // ---------------------------------------------------------------------------------------------------------------------
+#[derive(Serialize)]
+struct AppState {
+    hostname: &'static str,
+    catalog_list: Option<Vec<String>>,
+    service_list: Option<Vec<(String, String)>>,
+    error_msg: Option<String>,
+}
+
+// ---------------------------------------------------------------------------------------------------------------------
 // Start web server
 // ---------------------------------------------------------------------------------------------------------------------
 #[actix_web::main]
@@ -38,11 +47,19 @@ async fn main() -> std::io::Result<()> {
     log::info!("Starting HTTP server at http://localhost:8080");
 
     HttpServer::new(|| {
-        let mut tt = TinyTemplate::new();
+        let mut tt = TinyTemplate::<'_>::new();
         tt.add_template("index.html", INDEX).unwrap();
         tt.add_template("error.html", ERROR).unwrap();
 
+        let app_state = AppState {
+            hostname: str::from_utf8(HOST_NAME).unwrap(),
+            catalog_list: None,
+            service_list: None,
+            error_msg: None,
+        };
+
         App::new()
+            .app_data(web::Data::new(app_state))
             .app_data(web::Data::new(tt))
             .wrap(middleware::Logger::default())
             .service(web::resource("/").route(web::get().to(doc_root)))
@@ -59,31 +76,41 @@ async fn main() -> std::io::Result<()> {
 // Serve document root
 // ---------------------------------------------------------------------------------------------------------------------
 async fn doc_root(
+    mut app_state: web::Data<AppState>,
     tmpl: web::Data<TinyTemplate<'_>>,
     _query: web::Query<HashMap<String, String>>,
 ) -> Result<HttpResponse, Error> {
+    log::error!("---> doc_root()");
     let srv_doc_url = format!(
         "https://{}/{}/{}/",
         str::from_utf8(HOST_NAME).unwrap(),
         str::from_utf8(HOST_PATH).unwrap(),
         str::from_utf8(SERVICE_NAME).unwrap()
     );
-    log::info!("Fetching service document");
 
     // Read service document
+    log::info!("     Fetching CatalogService service document");
     let srv_doc = match fetch_odata_service_doc(&srv_doc_url).await {
         Ok(srv_doc) => srv_doc,
         Err(e) => {
-            let ctx = set_context(
-              str::from_utf8(HOST_NAME).unwrap(),
-              None, None,
-              Some(format!("{}\nThat's weird, the OData service CatalogService does not have a collection called CatalogCollection",e).as_ref()));
-
-            return Ok(build_http_response(StatusCode::OK, tmpl, ctx, true));
+            log::error!("<--- doc_root() ERROR");
+            return Ok(build_http_response(
+                AppState {
+                    hostname: app_state.hostname,
+                    catalog_list: None,
+                    service_list: None,
+                    error_msg: Some(format!(
+                        "{}\nError reading service document for OData service CatalogService",
+                        e
+                    )),
+                },
+                StatusCode::INTERNAL_SERVER_ERROR,
+                tmpl,
+            ));
         }
     };
 
-    // From service document, extract CatalogCollection URL
+    // From the service document, extract CatalogCollection URL
     let catalog_collection = match srv_doc
         .workspace
         .collections
@@ -92,45 +119,59 @@ async fn doc_root(
     {
         Some(cat_coll) => cat_coll,
         None => {
-            let ctx = set_context(str::from_utf8(HOST_NAME).unwrap(), None, None,
-            Some("That's weird, the OData service CatalogService does not have a collection called CatalogCollection"));
+            log::error!("<--- doc_root() ERROR");
 
-            return Ok(build_http_response(StatusCode::OK, tmpl, ctx, true));
+            return Ok(build_http_response(
+              AppState {
+                hostname: app_state.hostname,
+                catalog_list: None,
+                service_list: None,
+                error_msg: Some(format!("That's weird, the CatalogService does not have a collection called CatalogCollection"))
+              },
+                StatusCode::INTERNAL_SERVER_ERROR,
+                tmpl,
+            ));
         }
     };
 
     // Read the available catalogs
+    log::info!("     Fetching CatalogService catalogs");
     let feed_url = format!("{}{}", srv_doc_url, catalog_collection.href);
     let catalog_feed = match fetch_feed::<Catalog>(&feed_url).await {
         Ok(feed) => feed,
-        Err(e) => {
-            let ctx = set_context(
-                str::from_utf8(HOST_NAME).unwrap(),
-                None,
-                None,
-                Some(
-                    format!(
-                        "{}\nAn error occurred trying to read the CatalogCollection {}",
-                        e, feed_url
-                    )
-                    .as_ref(),
-                ),
-            );
+        Err(err) => {
+            log::error!("<--- doc_root() ERROR");
 
-            return Ok(build_http_response(StatusCode::OK, tmpl, ctx, true));
+            return Ok(build_http_response(
+                AppState {
+                    hostname: app_state.hostname,
+                    catalog_list: None,
+                    service_list: None,
+                    error_msg: Some(err.to_string()),
+                },
+                StatusCode::INTERNAL_SERVER_ERROR,
+                tmpl,
+            ));
         }
     };
 
-    // From catalog feed, extract list of Catalog names
+    // From the catalog feed, extract the list of available Catalog names
     if catalog_feed.entries.is_none() {
-        let ctx = set_context(
-            str::from_utf8(HOST_NAME).unwrap(),
-            None,
-            None,
-            Some(format!("No service catalogs have been defined: {}", catalog_feed.id).as_ref()),
-        );
+        log::error!("<--- doc_root() ERROR");
 
-        return Ok(build_http_response(StatusCode::OK, tmpl, ctx, true));
+        return Ok(build_http_response(
+            AppState {
+                hostname: app_state.hostname,
+                catalog_list: None,
+                service_list: None,
+                error_msg: Some(format!(
+                    "No service catalogs have been defined: {}",
+                    catalog_feed.id
+                )),
+            },
+            StatusCode::INTERNAL_SERVER_ERROR,
+            tmpl,
+        ));
     }
 
     let mut catalog_list: Vec<String> = Vec::new();
@@ -138,14 +179,16 @@ async fn doc_root(
         catalog_list.push(c.content.properties.unwrap().title);
     });
 
-    let ctx = set_context(
-        str::from_utf8(HOST_NAME).unwrap(),
-        Some(catalog_list),
-        None,
-        None,
-    );
-
-    Ok(build_http_response(StatusCode::OK, tmpl, ctx, false))
+    Ok(build_http_response(
+        AppState {
+            hostname: app_state.hostname,
+            catalog_list: Some(catalog_list),
+            service_list: None,
+            error_msg: None,
+        },
+        StatusCode::OK,
+        tmpl,
+    ))
 }
 
 // ---------------------------------------------------------------------------------------------------------------------
@@ -159,6 +202,7 @@ pub struct FetchServicesQS {
 #[get("/fetchServices")]
 async fn catalog_services<'template>(
     qs: web::Query<FetchServicesQS>,
+    app_state: web::Data<AppState>,
     tmpl: web::Data<TinyTemplate<'template>>,
 ) -> Result<HttpResponse, Error> {
     log::info!("---> catalog_services()");
@@ -171,38 +215,40 @@ async fn catalog_services<'template>(
     );
 
     // Read services in selected catalog
+    log::info!("     Fetching services in catalog {}", qs.catalog_name);
     let services_feed = match fetch_feed::<Service>(&services_url).await {
         Ok(feed) => feed,
         Err(e) => {
-            let ctx = set_context(
-                str::from_utf8(HOST_NAME).unwrap(),
-                None,
-                None,
-                Some(
-                    format!(
+            log::error!("<--- catalog_services() ERROR");
+            return Ok(build_http_response(
+                AppState {
+                    hostname: app_state.hostname,
+                    catalog_list: None,
+                    service_list: None,
+                    error_msg: Some(format!(
                         "{}\nAn error occurred trying to read the Services in catalog {}",
                         e, qs.catalog_name
-                    )
-                    .as_ref(),
-                ),
-            );
-
-            log::error!("<--- catalog_services() ERROR");
-            return Ok(build_http_response(StatusCode::OK, tmpl, ctx, true));
+                    )),
+                },
+                StatusCode::INTERNAL_SERVER_ERROR,
+                tmpl,
+            ));
         }
     };
 
     // Build service list
     if services_feed.entries.is_none() {
-        let ctx = set_context(
-            str::from_utf8(HOST_NAME).unwrap(),
-            None,
-            None,
-            Some(format!("No services found: {}", services_feed.id).as_ref()),
-        );
-
         log::error!("<--- catalog_services() ERROR");
-        return Ok(build_http_response(StatusCode::OK, tmpl, ctx, true));
+        return Ok(build_http_response(
+            AppState {
+                hostname: app_state.hostname,
+                catalog_list: None,
+                service_list: None,
+                error_msg: Some(format!("No services found: {}", services_feed.id)),
+            },
+            StatusCode::INTERNAL_SERVER_ERROR,
+            tmpl,
+        ));
     }
 
     let mut service_list: Vec<(String, String)> = Vec::new();
@@ -213,15 +259,17 @@ async fn catalog_services<'template>(
         })
     });
 
-    let ctx = set_context(
-        str::from_utf8(HOST_NAME).unwrap(),
-        None,
-        Some(service_list),
-        None,
-    );
-
     log::info!("<--- catalog_services()");
-    return Ok(build_http_response(StatusCode::OK, tmpl, ctx, false));
+    return Ok(build_http_response(
+        AppState {
+            hostname: app_state.hostname,
+            catalog_list: None,
+            service_list: Some(service_list),
+            error_msg: None,
+        },
+        StatusCode::OK,
+        tmpl,
+    ));
 }
 
 // ---------------------------------------------------------------------------------------------------------------------
@@ -235,6 +283,7 @@ pub struct FetchMetadataQS {
 #[get("/fetchMetadata")]
 async fn fetch_metadata<'template>(
     qs: web::Query<FetchMetadataQS>,
+    app_state: web::Data<AppState>,
     tmpl: web::Data<TinyTemplate<'template>>,
 ) -> Result<HttpResponse, Error> {
     log::info!("---> fetch_metadata()");
@@ -243,9 +292,17 @@ async fn fetch_metadata<'template>(
     let auth_chars = match fetch_auth() {
         Ok(auth_chars) => auth_chars,
         Err(err) => {
-            let ctx = set_context(str::from_utf8(HOST_NAME).unwrap(), None, None, Some(&err));
             log::error!("<--- fetch_metadata() ERROR");
-            return Ok(build_http_response(StatusCode::OK, tmpl, ctx, true));
+            return Ok(build_http_response(
+                AppState {
+                    hostname: app_state.hostname,
+                    catalog_list: None,
+                    service_list: None,
+                    error_msg: Some(err),
+                },
+                StatusCode::INTERNAL_SERVER_ERROR,
+                tmpl,
+            ));
         }
     };
 
@@ -259,18 +316,16 @@ async fn fetch_metadata<'template>(
     {
         Ok(response) => response,
         Err(err) => {
-            let ctx = set_context(
-                str::from_utf8(HOST_NAME).unwrap(),
-                None,
-                None,
-                Some(&err.to_string()),
-            );
             log::error!("<--- fetch_metadata() ERROR");
             return Ok(build_http_response(
+                AppState {
+                    hostname: app_state.hostname,
+                    catalog_list: None,
+                    service_list: None,
+                    error_msg: Some(err.to_string()),
+                },
                 StatusCode::from_u16(err.status().unwrap().as_u16()).unwrap(),
                 tmpl,
-                ctx,
-                true,
             ));
         }
     };
@@ -288,24 +343,30 @@ async fn fetch_metadata<'template>(
                 .body(raw_xml))
         }
         StatusCode::INTERNAL_SERVER_ERROR => {
-            let ctx = set_context(
-                str::from_utf8(HOST_NAME).unwrap(),
-                None,
-                None,
-                Some(&parse_odata_error(&raw_xml)),
-            );
             log::error!("<--- fetch_metadata() ERROR");
-            Ok(build_http_response(http_status_code, tmpl, ctx, true))
+            Ok(build_http_response(
+                AppState {
+                    hostname: app_state.hostname,
+                    catalog_list: None,
+                    service_list: None,
+                    error_msg: Some(parse_odata_error(&raw_xml)),
+                },
+                http_status_code,
+                tmpl,
+            ))
         }
         _ => {
-            let ctx = set_context(
-                str::from_utf8(HOST_NAME).unwrap(),
-                None,
-                None,
-                Some(&raw_xml),
-            );
             log::error!("<--- fetch_metadata() ERROR");
-            Ok(build_http_response(http_status_code, tmpl, ctx, true))
+            Ok(build_http_response(
+                AppState {
+                    hostname: app_state.hostname,
+                    catalog_list: None,
+                    service_list: None,
+                    error_msg: Some(raw_xml),
+                },
+                http_status_code,
+                tmpl,
+            ))
         }
     }
 }
@@ -407,21 +468,6 @@ async fn fetch_odata_service_doc(srv_doc_url: &str) -> Result<AtomService, anyho
 }
 
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-fn set_context(
-    hostname: &str,
-    catalog_list: Option<Vec<String>>,
-    service_list: Option<Vec<(String, String)>>,
-    error_msg: Option<&str>,
-) -> serde_json::Value {
-    json!({
-      "hostName": hostname,
-      "catalogList": catalog_list,
-      "serviceList": service_list,
-      "errMsg": error_msg
-    })
-}
-
-// - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 fn parse_odata_error(raw_xml: &str) -> String {
     match ODataError::from_str(&raw_xml) {
         Ok(odata_error) => format!("{:#?}", odata_error.message),
@@ -430,18 +476,26 @@ fn parse_odata_error(raw_xml: &str) -> String {
 }
 
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-fn build_http_response<'template, C>(
+fn build_http_response<'template>(
+    app_state: AppState,
     status_code: StatusCode,
-    template: web::Data<TinyTemplate<'template>>,
-    context: C,
-    is_error: bool,
-) -> HttpResponse
-where
-    C: Serialize,
-{
-    let template_name = if is_error { "error.html" } else { "index.html" };
-    let response_body = template
-        .render(template_name, &context)
+    tmpl: web::Data<TinyTemplate<'template>>,
+) -> HttpResponse {
+    let template_name = if app_state.error_msg.is_some() {
+        "error.html"
+    } else {
+        "index.html"
+    };
+    let response_body = tmpl
+        .render(
+            template_name,
+            &json!({
+              "hostName": app_state.hostname,
+              "catalogList": app_state.catalog_list,
+              "serviceList": app_state.service_list,
+              "errMsg": app_state.error_msg
+            }),
+        )
         .map_err(|err| error::ErrorInternalServerError(format!("Template error\n{}", err)))
         .unwrap();
 
