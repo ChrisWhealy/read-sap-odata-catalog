@@ -2,20 +2,21 @@ pub mod auth;
 pub mod err_handlers;
 
 use crate::{auth::fetch_auth, err_handlers::error_handlers};
+
+use actix_web::{
+    error, get, http::StatusCode, middleware, web, App, Error, HttpResponse, HttpServer, Result,
+};
 use anyhow::anyhow;
 use parse_sap_atom_feed::{
     atom::{feed::Feed, AtomService},
     odata_error::ODataError,
-};
-
-use actix_web::{
-    error, get, http::StatusCode, middleware, web, App, Error, HttpResponse, HttpServer, Result,
 };
 use serde::{de::DeserializeOwned, Deserialize, Serialize};
 use serde_json::json;
 use std::{
     collections::HashMap,
     str::{self, FromStr},
+    sync::Mutex,
 };
 use tinytemplate::TinyTemplate;
 
@@ -30,12 +31,12 @@ static HOST_PATH: &[u8] = "/sap/opu/odata/iwfnd".as_bytes();
 static SERVICE_NAME: &[u8] = "catalogservice;v=2".as_bytes();
 
 // ---------------------------------------------------------------------------------------------------------------------
-#[derive(Serialize)]
+#[derive(Serialize, Debug)]
 struct AppState {
     hostname: &'static str,
-    catalog_list: Option<Vec<String>>,
-    service_list: Option<Vec<(String, String)>>,
-    error_msg: Option<String>,
+    catalog_list: Mutex<Option<Vec<String>>>,
+    service_list: Mutex<Option<Vec<(String, String)>>>,
+    error_msg: Mutex<Option<String>>,
 }
 
 // ---------------------------------------------------------------------------------------------------------------------
@@ -51,11 +52,12 @@ async fn main() -> std::io::Result<()> {
         tt.add_template("index.html", INDEX).unwrap();
         tt.add_template("error.html", ERROR).unwrap();
 
+        // Initial app state
         let app_state = AppState {
             hostname: str::from_utf8(HOST_NAME).unwrap(),
-            catalog_list: None,
-            service_list: None,
-            error_msg: None,
+            catalog_list: Mutex::new(None),
+            service_list: Mutex::new(None),
+            error_msg: Mutex::new(None),
         };
 
         App::new()
@@ -76,11 +78,11 @@ async fn main() -> std::io::Result<()> {
 // Serve document root
 // ---------------------------------------------------------------------------------------------------------------------
 async fn doc_root(
-    mut app_state: web::Data<AppState>,
+    app_state: web::Data<AppState>,
     tmpl: web::Data<TinyTemplate<'_>>,
     _query: web::Query<HashMap<String, String>>,
 ) -> Result<HttpResponse, Error> {
-    log::error!("---> doc_root()");
+    log::info!("---> doc_root()");
     let srv_doc_url = format!(
         "https://{}/{}/{}/",
         str::from_utf8(HOST_NAME).unwrap(),
@@ -92,18 +94,11 @@ async fn doc_root(
     log::info!("     Fetching CatalogService service document");
     let srv_doc = match fetch_odata_service_doc(&srv_doc_url).await {
         Ok(srv_doc) => srv_doc,
-        Err(e) => {
+        Err(err) => {
+            *app_state.error_msg.lock().unwrap() = Some(format!("{}", err));
             log::error!("<--- doc_root() ERROR");
             return Ok(build_http_response(
-                AppState {
-                    hostname: app_state.hostname,
-                    catalog_list: None,
-                    service_list: None,
-                    error_msg: Some(format!(
-                        "{}\nError reading service document for OData service CatalogService",
-                        e
-                    )),
-                },
+                app_state,
                 StatusCode::INTERNAL_SERVER_ERROR,
                 tmpl,
             ));
@@ -119,15 +114,10 @@ async fn doc_root(
     {
         Some(cat_coll) => cat_coll,
         None => {
+            *app_state.error_msg.lock().unwrap() = Some(format!("That's weird, the CatalogService does not have a collection called CatalogCollection"));
             log::error!("<--- doc_root() ERROR");
-
             return Ok(build_http_response(
-              AppState {
-                hostname: app_state.hostname,
-                catalog_list: None,
-                service_list: None,
-                error_msg: Some(format!("That's weird, the CatalogService does not have a collection called CatalogCollection"))
-              },
+                app_state,
                 StatusCode::INTERNAL_SERVER_ERROR,
                 tmpl,
             ));
@@ -140,15 +130,10 @@ async fn doc_root(
     let catalog_feed = match fetch_feed::<Catalog>(&feed_url).await {
         Ok(feed) => feed,
         Err(err) => {
+            *app_state.error_msg.lock().unwrap() = Some(err.to_string());
             log::error!("<--- doc_root() ERROR");
-
             return Ok(build_http_response(
-                AppState {
-                    hostname: app_state.hostname,
-                    catalog_list: None,
-                    service_list: None,
-                    error_msg: Some(err.to_string()),
-                },
+                app_state,
                 StatusCode::INTERNAL_SERVER_ERROR,
                 tmpl,
             ));
@@ -157,18 +142,14 @@ async fn doc_root(
 
     // From the catalog feed, extract the list of available Catalog names
     if catalog_feed.entries.is_none() {
+        *app_state.error_msg.lock().unwrap() = Some(format!(
+            "No service catalogs have been defined: {}",
+            catalog_feed.id
+        ));
         log::error!("<--- doc_root() ERROR");
 
         return Ok(build_http_response(
-            AppState {
-                hostname: app_state.hostname,
-                catalog_list: None,
-                service_list: None,
-                error_msg: Some(format!(
-                    "No service catalogs have been defined: {}",
-                    catalog_feed.id
-                )),
-            },
+            app_state,
             StatusCode::INTERNAL_SERVER_ERROR,
             tmpl,
         ));
@@ -179,16 +160,10 @@ async fn doc_root(
         catalog_list.push(c.content.properties.unwrap().title);
     });
 
-    Ok(build_http_response(
-        AppState {
-            hostname: app_state.hostname,
-            catalog_list: Some(catalog_list),
-            service_list: None,
-            error_msg: None,
-        },
-        StatusCode::OK,
-        tmpl,
-    ))
+    *app_state.catalog_list.lock().unwrap() = Some(catalog_list);
+
+    log::info!("<--- doc_root()");
+    Ok(build_http_response(app_state, StatusCode::OK, tmpl))
 }
 
 // ---------------------------------------------------------------------------------------------------------------------
@@ -219,17 +194,13 @@ async fn catalog_services<'template>(
     let services_feed = match fetch_feed::<Service>(&services_url).await {
         Ok(feed) => feed,
         Err(e) => {
+            *app_state.error_msg.lock().unwrap() = Some(format!(
+                "{}\nAn error occurred trying to read the Services in catalog {}",
+                e, qs.catalog_name
+            ));
             log::error!("<--- catalog_services() ERROR");
             return Ok(build_http_response(
-                AppState {
-                    hostname: app_state.hostname,
-                    catalog_list: None,
-                    service_list: None,
-                    error_msg: Some(format!(
-                        "{}\nAn error occurred trying to read the Services in catalog {}",
-                        e, qs.catalog_name
-                    )),
-                },
+                app_state,
                 StatusCode::INTERNAL_SERVER_ERROR,
                 tmpl,
             ));
@@ -238,14 +209,11 @@ async fn catalog_services<'template>(
 
     // Build service list
     if services_feed.entries.is_none() {
+        *app_state.error_msg.lock().unwrap() =
+            Some(format!("No services found: {}", services_feed.id));
         log::error!("<--- catalog_services() ERROR");
         return Ok(build_http_response(
-            AppState {
-                hostname: app_state.hostname,
-                catalog_list: None,
-                service_list: None,
-                error_msg: Some(format!("No services found: {}", services_feed.id)),
-            },
+            app_state,
             StatusCode::INTERNAL_SERVER_ERROR,
             tmpl,
         ));
@@ -259,17 +227,10 @@ async fn catalog_services<'template>(
         })
     });
 
+    *app_state.service_list.lock().unwrap() = Some(service_list);
     log::info!("<--- catalog_services()");
-    return Ok(build_http_response(
-        AppState {
-            hostname: app_state.hostname,
-            catalog_list: None,
-            service_list: Some(service_list),
-            error_msg: None,
-        },
-        StatusCode::OK,
-        tmpl,
-    ));
+
+    return Ok(build_http_response(app_state, StatusCode::OK, tmpl));
 }
 
 // ---------------------------------------------------------------------------------------------------------------------
@@ -292,14 +253,10 @@ async fn fetch_metadata<'template>(
     let auth_chars = match fetch_auth() {
         Ok(auth_chars) => auth_chars,
         Err(err) => {
+            *app_state.error_msg.lock().unwrap() = Some(err);
             log::error!("<--- fetch_metadata() ERROR");
             return Ok(build_http_response(
-                AppState {
-                    hostname: app_state.hostname,
-                    catalog_list: None,
-                    service_list: None,
-                    error_msg: Some(err),
-                },
+                app_state,
                 StatusCode::INTERNAL_SERVER_ERROR,
                 tmpl,
             ));
@@ -316,14 +273,10 @@ async fn fetch_metadata<'template>(
     {
         Ok(response) => response,
         Err(err) => {
+            *app_state.error_msg.lock().unwrap() = Some(err.to_string());
             log::error!("<--- fetch_metadata() ERROR");
             return Ok(build_http_response(
-                AppState {
-                    hostname: app_state.hostname,
-                    catalog_list: None,
-                    service_list: None,
-                    error_msg: Some(err.to_string()),
-                },
+                app_state,
                 StatusCode::from_u16(err.status().unwrap().as_u16()).unwrap(),
                 tmpl,
             ));
@@ -343,30 +296,14 @@ async fn fetch_metadata<'template>(
                 .body(raw_xml))
         }
         StatusCode::INTERNAL_SERVER_ERROR => {
+            *app_state.error_msg.lock().unwrap() = Some(parse_odata_error(&raw_xml));
             log::error!("<--- fetch_metadata() ERROR");
-            Ok(build_http_response(
-                AppState {
-                    hostname: app_state.hostname,
-                    catalog_list: None,
-                    service_list: None,
-                    error_msg: Some(parse_odata_error(&raw_xml)),
-                },
-                http_status_code,
-                tmpl,
-            ))
+            Ok(build_http_response(app_state, http_status_code, tmpl))
         }
         _ => {
+            *app_state.error_msg.lock().unwrap() = Some(raw_xml);
             log::error!("<--- fetch_metadata() ERROR");
-            Ok(build_http_response(
-                AppState {
-                    hostname: app_state.hostname,
-                    catalog_list: None,
-                    service_list: None,
-                    error_msg: Some(raw_xml),
-                },
-                http_status_code,
-                tmpl,
-            ))
+            Ok(build_http_response(app_state, http_status_code, tmpl))
         }
     }
 }
@@ -477,11 +414,11 @@ fn parse_odata_error(raw_xml: &str) -> String {
 
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 fn build_http_response<'template>(
-    app_state: AppState,
+    app_state: web::Data<AppState>,
     status_code: StatusCode,
     tmpl: web::Data<TinyTemplate<'template>>,
 ) -> HttpResponse {
-    let template_name = if app_state.error_msg.is_some() {
+    let template_name = if app_state.error_msg.lock().unwrap().is_some() {
         "error.html"
     } else {
         "index.html"
@@ -491,9 +428,9 @@ fn build_http_response<'template>(
             template_name,
             &json!({
               "hostName": app_state.hostname,
-              "catalogList": app_state.catalog_list,
-              "serviceList": app_state.service_list,
-              "errMsg": app_state.error_msg
+              "catalogList": *app_state.catalog_list.lock().unwrap(),
+              "serviceList": *app_state.service_list.lock().unwrap(),
+              "errMsg": *app_state.error_msg.lock().unwrap()
             }),
         )
         .map_err(|err| error::ErrorInternalServerError(format!("Template error\n{}", err)))

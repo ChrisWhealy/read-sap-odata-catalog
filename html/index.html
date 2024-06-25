@@ -1,28 +1,27 @@
 <!DOCTYPE html>
 <html>
 
-<head>
-</head>
-
 <body>
   <h2>Fetch OData Service Metadata from {hostName}</h2>
   {{ if catalogList }}
-  <script type="text/javascript">
-    const showServicesInCatalog = () => \{
-      document.catalogForm.action = `./fetchServices?catalog_name=` + document.querySelector("#catalogList").selectedOptions[0].value;
-    return true
-    }
-  </script>
-  <form name="catalogForm" onsubmit="return showServicesInCatalog();">
-    <label for="catalogList">Select a Service Catalog</label>
-    <select id="catalogList" name="catalog_name">
-      {{ for cat in catalogList }}
-      <option value="{cat}">{cat}</option>
-      {{ endfor }}
-    </select>
+  <div>
+    <script type="text/javascript">
+      const showServicesInCatalog = () => \{
+        document.catalogForm.action = `./fetchServices?catalog_name=` + document.querySelector("#catalogList").selectedOptions[0].value;
+      return true
+      }
+    </script>
+    <form name="catalogForm" onsubmit="return showServicesInCatalog();">
+      <label for="catalogList">Select a Service Catalog</label>
+      <select id="catalogList" name="catalog_name">
+        {{ for cat in catalogList }}
+        <option value="{cat}">{cat}</option>
+        {{ endfor }}
+      </select>
 
-    <input type="submit" value="Show services in selected catalog">
-  </form>
+      <input type="submit" value="Show services in selected catalog">
+    </form>
+  </div>
   {{ endif }}
 
   {{ if serviceList }}
