@@ -2,46 +2,56 @@
 <html>
 
 <body>
-  <h2>Fetch OData Service Metadata from {hostName}</h2>
-  {{ if catalogList }}
-  <div>
-    <script type="text/javascript">
-      const showServicesInCatalog = () => \{
-        document.catalogForm.action = `./fetchServices?catalog_name=` + document.querySelector("#catalogList").selectedOptions[0].value;
-      return true
-      }
-    </script>
-    <form name="catalogForm" onsubmit="return showServicesInCatalog();">
-      <label for="catalogList">Select a Service Catalog</label>
-      <select id="catalogList" name="catalog_name">
-        {{ for cat in catalogList }}
-        <option value="{cat}">{cat}</option>
-        {{ endfor }}
-      </select>
-
-      <input type="submit" value="Show services in selected catalog">
-    </form>
-  </div>
-  {{ endif }}
-
-  {{ if serviceList }}
   <script type="text/javascript">
+    const showServicesInCatalog = () => \{
+      document.catalogForm.action = `./fetchServices?catalog_name=` + document.querySelector("#catalogList").selectedOptions[0].value;
+    return true
+      }
+
     const showServiceMetadata = () => \{
       document.serviceForm.action = `./fetchMetadata?url=` + document.querySelector("#serviceList").selectedOptions[0].value;
     return true
     }
   </script>
-  <form name="serviceForm" onsubmit="return showServiceMetadata();">
-    <label for="serviceList">Select a Service</label>
-    <select id="serviceList" name="url">
-      {{ for srv in serviceList }}
-      <option value="{srv.1}">{srv.0}</option>
-      {{ endfor }}
-    </select>
 
-    <input type="submit" value="Fetch metadata for selected service">
-  </form>
-  {{ endif }}
+  <h2>Fetch OData Service Metadata from {hostName}</h2>
+  <table border="0" cellpadding="8" cellspacing="0">
+    <form name="catalogForm" onsubmit="return showServicesInCatalog();">
+      <tr>
+        <td><label for="catalogList">Select a Service Catalog</label></td>
+        <td>
+          <select id="catalogList" name="catalog_name">
+            {{ for cat in catalogList }}
+            <option value="{cat}">{cat}</option>
+            {{ endfor }}
+          </select>
+        </td>
+        <td>
+          <input type="submit" value="Show services in selected catalog">
+        </td>
+      </tr>
+    </form>
+
+    {{ if serviceList }}
+    <form name="serviceForm" onsubmit="return showServiceMetadata();">
+      <tr>
+        <td><label for="serviceList">Select a Service</label></td>
+        <td><select id="serviceList" name="url">
+            {{ for srv in serviceList }}
+            <option value="{srv.1}">{srv.0}</option>
+            {{ endfor }}
+          </select></td>
+        <td><input type="submit" value="Fetch metadata for selected service"></td>
+      </tr>
+    </form>
+    {{ endif }}
+
+    {{ if errMsg }}
+    <tr>
+      <td colspan="3">{errMsg}</td>
+    </tr>
+    {{ endif }}
+  </table>
 </body>
 
 </html>

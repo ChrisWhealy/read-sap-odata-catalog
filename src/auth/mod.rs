@@ -1,18 +1,5 @@
+use crate::read_lines;
 use base64::{engine::general_purpose, Engine as _};
-use std::{
-    fs::File,
-    io::BufReader,
-    io::{self, BufRead},
-    path::Path,
-};
-
-fn read_lines<P>(filename: P) -> io::Result<io::Lines<io::BufReader<File>>>
-where
-    P: AsRef<Path>,
-{
-    let file = File::open(filename)?;
-    Ok(BufReader::new(file).lines())
-}
 
 // ---------------------------------------------------------------------------------------------------------------------
 // Fetch userid and password from .env file

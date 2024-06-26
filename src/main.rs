@@ -15,6 +15,10 @@ use serde::{de::DeserializeOwned, Deserialize, Serialize};
 use serde_json::json;
 use std::{
     collections::HashMap,
+    fs::File,
+    io::BufReader,
+    io::{self, BufRead},
+    path::Path,
     str::{self, FromStr},
     sync::Mutex,
 };
@@ -25,15 +29,49 @@ include!(concat!(env!("OUT_DIR"), "/catalogservice.rs"));
 use catalogservice::*;
 
 static INDEX: &str = include_str!("../html/index.html");
-static ERROR: &str = include_str!("../html/error.html");
-static HOST_NAME: &[u8] = "sapes5.sapdevcenter.com".as_bytes();
+static CATALOGSERVICE_VARNAME: &[u8] = "SAP_CATALOGSERVICE_HOSTNAME".as_bytes();
 static HOST_PATH: &[u8] = "/sap/opu/odata/iwfnd".as_bytes();
 static SERVICE_NAME: &[u8] = "catalogservice;v=2".as_bytes();
 
 // ---------------------------------------------------------------------------------------------------------------------
+pub fn read_lines<P>(filename: P) -> io::Result<io::Lines<io::BufReader<File>>>
+where
+    P: AsRef<Path>,
+{
+    let file = File::open(filename)?;
+    Ok(BufReader::new(file).lines())
+}
+
+// ---------------------------------------------------------------------------------------------------------------------
+fn fetch_env_var(varname: &str) -> Result<String, String> {
+    let mut value = String::from("unknown");
+
+    // Try to obtain the environment variable file .env
+    if let Ok(lines) = read_lines(".env") {
+        for line in lines {
+            match line {
+                Ok(l) => {
+                    if l.starts_with(varname) {
+                        let (_, u) = l.split_at(l.find("=").unwrap() + 1);
+                        value = u.to_owned();
+                    }
+                }
+                Err(_) => (),
+            }
+        }
+    }
+
+    if value.eq("unknown") {
+        Err(format!("No value for {} found in .env file", varname))
+    } else {
+        Ok(value)
+    }
+}
+
+// ---------------------------------------------------------------------------------------------------------------------
 #[derive(Serialize, Debug)]
 struct AppState {
-    hostname: &'static str,
+    hostname: String,
     catalog_list: Mutex<Option<Vec<String>>>,
     service_list: Mutex<Option<Vec<(String, String)>>>,
     error_msg: Mutex<Option<String>>,
@@ -45,23 +83,33 @@ struct AppState {
 #[actix_web::main]
 async fn main() -> std::io::Result<()> {
     env_logger::init_from_env(env_logger::Env::new().default_filter_or("info"));
+
+    let hostname = match fetch_env_var(str::from_utf8(CATALOGSERVICE_VARNAME).unwrap()) {
+        Ok(value) => value,
+        Err(err_msg) => {
+            log::error!("{err_msg}");
+            std::process::exit(0x01);
+        }
+    };
+
+    log::info!("SAP CatalogService hostname = {}", hostname);
     log::info!("Starting HTTP server at http://localhost:8080");
 
-    HttpServer::new(|| {
-        let mut tt = TinyTemplate::<'_>::new();
-        tt.add_template("index.html", INDEX).unwrap();
-        tt.add_template("error.html", ERROR).unwrap();
+    // Initial app state
+    let app_state = web::Data::new(AppState {
+        hostname: hostname,
+        catalog_list: Mutex::new(None),
+        service_list: Mutex::new(None),
+        error_msg: Mutex::new(None),
+    });
 
-        // Initial app state
-        let app_state = AppState {
-            hostname: str::from_utf8(HOST_NAME).unwrap(),
-            catalog_list: Mutex::new(None),
-            service_list: Mutex::new(None),
-            error_msg: Mutex::new(None),
-        };
+    HttpServer::new(move || {
+        let mut tt = TinyTemplate::<'_>::new();
+
+        tt.add_template("index.html", INDEX).unwrap();
 
         App::new()
-            .app_data(web::Data::new(app_state))
+            .app_data(app_state.clone())
             .app_data(web::Data::new(tt))
             .wrap(middleware::Logger::default())
             .service(web::resource("/").route(web::get().to(doc_root)))
@@ -85,7 +133,7 @@ async fn doc_root(
     log::info!("---> doc_root()");
     let srv_doc_url = format!(
         "https://{}/{}/{}/",
-        str::from_utf8(HOST_NAME).unwrap(),
+        app_state.hostname,
         str::from_utf8(HOST_PATH).unwrap(),
         str::from_utf8(SERVICE_NAME).unwrap()
     );
@@ -183,7 +231,7 @@ async fn catalog_services<'template>(
     log::info!("---> catalog_services()");
     let services_url = format!(
         "https://{}/{}/{}/CatalogCollection('{}')/Services",
-        str::from_utf8(HOST_NAME).unwrap(),
+        app_state.hostname,
         str::from_utf8(HOST_PATH).unwrap(),
         str::from_utf8(SERVICE_NAME).unwrap(),
         qs.catalog_name
@@ -226,6 +274,7 @@ async fn catalog_services<'template>(
             (props.id, props.metadata_url)
         })
     });
+    service_list.sort_by(|a, b| a.0.cmp(&b.0));
 
     *app_state.service_list.lock().unwrap() = Some(service_list);
     log::info!("<--- catalog_services()");
@@ -398,7 +447,7 @@ async fn fetch_odata_service_doc(srv_doc_url: &str) -> Result<AtomService, anyho
     match http_status_code {
         reqwest::StatusCode::OK => match AtomService::from_str(&raw_xml) {
             Ok(srv_doc) => Ok(srv_doc),
-            Err(e) => Err(anyhow!(e)),
+            Err(err) => Err(anyhow!(err)),
         },
         _ => Err(anyhow!(parse_odata_error(&raw_xml))),
     }
@@ -408,7 +457,7 @@ async fn fetch_odata_service_doc(srv_doc_url: &str) -> Result<AtomService, anyho
 fn parse_odata_error(raw_xml: &str) -> String {
     match ODataError::from_str(&raw_xml) {
         Ok(odata_error) => format!("{:#?}", odata_error.message),
-        Err(e) => format!("{:#?}", e),
+        Err(err) => format!("{err:#?}"),
     }
 }
 
@@ -418,14 +467,9 @@ fn build_http_response<'template>(
     status_code: StatusCode,
     tmpl: web::Data<TinyTemplate<'template>>,
 ) -> HttpResponse {
-    let template_name = if app_state.error_msg.lock().unwrap().is_some() {
-        "error.html"
-    } else {
-        "index.html"
-    };
     let response_body = tmpl
         .render(
-            template_name,
+            "index.html",
             &json!({
               "hostName": app_state.hostname,
               "catalogList": *app_state.catalog_list.lock().unwrap(),
