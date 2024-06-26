@@ -47,10 +47,12 @@ Your project also needs to contain an `/odata` folder within which you have stor
 
 ## WARNNING
 
-Just because an OData service is listed in the dropdown, does not mean it can be invoked - it is possible to partially define an OData service.
-So the service name will be listed, but it cannot be invoked.
+Just because an OData service is listed in the dropdown, does not mean it can be invoked.
+In a Gateway server, it is possible to partially define an OData service!
 
-You cannot know this before first attempting to display that service's service document.
+Consequently, you will see the service name listed, but you will not be able to invoke it.
+
+In order to discover whether or not a service can be invoked, you must attempt to display its service document.
 
 Consequently, you may see error messages such as these:
 
