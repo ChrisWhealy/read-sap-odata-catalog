@@ -1,6 +1,6 @@
-# Minimal App for Reading the Metadata of the Demo OData Services from SAP's Dev Centre Server
+# Minimal App for Reading the Metadata of Published OData Services on SAP's Dev Center Server
 
-A proof-of-concept demo app that calls the OData service `CATALOGSERVICE` on SAP's public Dev Center server.
+A proof-of-concept demo app that calls version 2 of the OData service `CATALOGSERVICE` on SAP's public Dev Center server.
 
 In this minimal demo scenario, the metadata XML for the selected service is simply returned to the browser as plain text.
 This XML can then be saved locally and used by the [`parse-sap-odata`](https://crates.io/crates/parse-sap-odata) crate for building an interface to that OData Service.
@@ -19,7 +19,7 @@ To access SAP's demmo OData server, you must already have a userid and password 
    SAP_CATALOGSERVICE_HOSTNAME=sapes5.sapdevcenter.com
    ```
 
-You could also enter the hostname of your own Gateway server, plus your own logon credentials.
+Assuming that your own Gateway server shares the same version of the `CATALOGSERVICE` OData service, you could enter the hostname of your server, plus your own logon credentials.
 
 ## Limitations
 
