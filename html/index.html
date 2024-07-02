@@ -1,21 +1,65 @@
 <!DOCTYPE html>
 <html>
 
+<head>
+  <style>
+    body \{ font-family: "Helvetica Neue",
+    Arial,
+    sans-serif;
+    font-size: 16px;
+    font-weight: normal;
+    line-height: 1.5;
+    -webkit-text-size-adjust: 100%;
+    background: #fffff0;
+    margin: 20px;
+    }
+
+    b,
+    strong \{ font-weight: bolder
+    }
+
+    h1,
+    h2 \{ margin: 0 0 20px 0;
+    color: #333;
+    text-transform: none
+    }
+
+    h1 \{ font-size: 2.23125rem;
+    line-height: 1.2
+    }
+
+    h2 \{ font-size: 1.7rem;
+    line-height: 1.3
+    }
+
+    table \{ border: 1px black solid;
+    border-radius: 5px;
+    border-spacing: 5px;
+    background: #fff;
+    }
+
+    .err_msg \{ background-color: rgb(233, 131, 131);
+    padding: 5px;
+    text-align: center
+    }
+  </style>
+</head>
+
 <body>
   <script type="text/javascript">
     const showServicesInCatalog = () => \{
-      document.catalogForm.action = `./fetchServices?catalog_name=` + document.querySelector("#catalogList").selectedOptions[0].value;
+      document.catalogForm.action = `./fetchServices?catalog_name=$\{document.querySelector("#catalogList").selectedOptions[0].value}`
     return true
       }
 
     const showServiceMetadata = () => \{
-      document.serviceForm.action = `./fetchMetadata?url=` + document.querySelector("#serviceList").selectedOptions[0].value;
+      document.serviceForm.action = `./fetchMetadata?url=$\{document.querySelector("#serviceList").selectedOptions[0].value}`
     return true
     }
   </script>
 
   <h2>Fetch OData Service Metadata from {hostName}</h2>
-  <table border="0" cellpadding="8" cellspacing="0">
+  <table>
     <form name="catalogForm" onsubmit="return showServicesInCatalog();">
       <tr>
         <td><label for="catalogList">Select a Service Catalog</label></td>
@@ -43,12 +87,15 @@
           </select></td>
         <td><input type="submit" value="Fetch metadata for selected service"></td>
       </tr>
+      <script type="text/javascript">
+        document.getElementById("serviceList").value = "{lastSrv}"
+      </script>
     </form>
     {{ endif }}
 
     {{ if errMsg }}
     <tr>
-      <td colspan="3">{errMsg}</td>
+      <td colspan="3" class="err_msg">{errMsg}</td>
     </tr>
     {{ endif }}
   </table>

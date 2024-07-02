@@ -75,6 +75,7 @@ struct AppState {
     catalog_list: Mutex<Option<Vec<String>>>,
     service_list: Mutex<Option<Vec<(String, String)>>>,
     error_msg: Mutex<Option<String>>,
+    last_srv: Mutex<Option<String>>,
 }
 
 // ---------------------------------------------------------------------------------------------------------------------
@@ -101,6 +102,7 @@ async fn main() -> std::io::Result<()> {
         catalog_list: Mutex::new(None),
         service_list: Mutex::new(None),
         error_msg: Mutex::new(None),
+        last_srv: Mutex::new(None),
     });
 
     HttpServer::new(move || {
@@ -137,6 +139,10 @@ async fn doc_root(
         str::from_utf8(HOST_PATH).unwrap(),
         str::from_utf8(SERVICE_NAME).unwrap()
     );
+
+    *app_state.service_list.lock().unwrap() = None;
+    *app_state.error_msg.lock().unwrap() = None;
+    *app_state.last_srv.lock().unwrap() = None;
 
     // Read service document
     log::info!("     Fetching CatalogService service document");
@@ -268,14 +274,16 @@ async fn catalog_services<'template>(
     }
 
     let mut service_list: Vec<(String, String)> = Vec::new();
-    services_feed.entries.unwrap().into_iter().for_each(|s| {
-        service_list.push({
-            let props = s.content.properties.unwrap().clone();
-            (props.id, props.metadata_url)
-        })
+    services_feed.entries.unwrap().into_iter().for_each(|srv| {
+        let props = srv.content.properties.unwrap().clone();
+        service_list.push((props.id, props.metadata_url));
     });
+
     service_list.sort_by(|a, b| a.0.cmp(&b.0));
 
+    let first_srv = service_list[0].1.clone();
+
+    *app_state.last_srv.lock().unwrap() = Some(first_srv);
     *app_state.service_list.lock().unwrap() = Some(service_list);
     log::info!("<--- catalog_services()");
 
@@ -297,7 +305,7 @@ async fn fetch_metadata<'template>(
     tmpl: web::Data<TinyTemplate<'template>>,
 ) -> Result<HttpResponse, Error> {
     log::info!("---> fetch_metadata()");
-    let client = reqwest::Client::new();
+    *app_state.last_srv.lock().unwrap() = Some(qs.url.clone());
 
     let auth_chars = match fetch_auth() {
         Ok(auth_chars) => auth_chars,
@@ -314,6 +322,7 @@ async fn fetch_metadata<'template>(
 
     log::info!("GET: {}", qs.url);
 
+    let client = reqwest::Client::new();
     let response = match client
         .get(qs.url.clone())
         .header("Authorization", format!("Basic {}", auth_chars))
@@ -339,10 +348,22 @@ async fn fetch_metadata<'template>(
 
     match http_status_code {
         StatusCode::OK => {
+            *app_state.error_msg.lock().unwrap() = None;
             log::info!("<--- fetch_metadata()");
+            // Dump the raw XML on the client
             Ok(HttpResponse::build(http_status_code)
                 .content_type("text/plain")
                 .body(raw_xml))
+        }
+        StatusCode::UNAUTHORIZED => {
+            *app_state.error_msg.lock().unwrap() = Some("Logon failed".to_owned());
+            log::error!("<--- fetch_metadata() ERROR");
+            Ok(build_http_response(app_state, http_status_code, tmpl))
+        }
+        StatusCode::NOT_FOUND => {
+            *app_state.error_msg.lock().unwrap() = Some("Service not found.  This may be because the service has been defined, but not activated.".to_owned());
+            log::error!("<--- fetch_metadata() ERROR");
+            Ok(build_http_response(app_state, http_status_code, tmpl))
         }
         StatusCode::INTERNAL_SERVER_ERROR => {
             *app_state.error_msg.lock().unwrap() = Some(parse_odata_error(&raw_xml));
@@ -474,7 +495,8 @@ fn build_http_response<'template>(
               "hostName": app_state.hostname,
               "catalogList": *app_state.catalog_list.lock().unwrap(),
               "serviceList": *app_state.service_list.lock().unwrap(),
-              "errMsg": *app_state.error_msg.lock().unwrap()
+              "errMsg": *app_state.error_msg.lock().unwrap(),
+              "lastSrv": *app_state.last_srv.lock().unwrap()
             }),
         )
         .map_err(|err| error::ErrorInternalServerError(format!("Template error\n{}", err)))

@@ -62,8 +62,7 @@ or
 
 ![Error screen 2](./imgs/error02.png)
 
-You might also see the HTML of the German "Anmeldung fehlgeschlagen" (Login failed) screen.
+It is also possible that an OData service has been defined, but not activated.
+In which case, you will see this message:
 
 ![Error screen 3](./imgs/error03.png)
-
-Give that this is a PoC app, no attempt has (yet) been made to handle these errors gracefully.
