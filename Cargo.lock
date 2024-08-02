@@ -1411,9 +1411,9 @@ dependencies = [
 
 [[package]]
 name = "parse-sap-odata"
-version = "1.2.5"
+version = "1.3.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "248395e18b997f588d93b71d1765e031a11676aa0b786025aebd9e1a771284d6"
+checksum = "0ceec878bd010a7aa06fb80b084726a9da49155a50c26c6b45b02d86649facc8"
 dependencies = [
  "anyhow",
  "check_keyword",
